@@ -5,10 +5,10 @@
 </style></head><body><header><h1>🏠 El meu magatzem</h1><p>Estoc real · Compres · Històric de preus</p></header><main><div class="stats"><div><b id="statp">—</b><small>Productes</small></div><div><b id="statu">—</b><small>En ús</small></div><div><b id="statlow">—</b><small>Per reposar</small></div></div><nav class="tabs"><button data-tab="stock" class="active">Magatzem</button><button data-tab="use">En ús</button><button data-tab="shopping">Comprar</button><button data-tab="history">Preus</button><button data-tab="settings">Dades</button></nav>
 <section id="stock" class="active"><div class="filters"><input id="qstock" placeholder="🔎 Buscar un producte..." autocomplete="off"></div><div id="stocklist"></div></section>
 <section id="use"><input id="quse" placeholder="🔎 Buscar en ús..." autocomplete="off"><div id="uselist" style="margin-top:10px"></div></section>
-<section id="shopping"><div class="panel"><h2>📷 Fotografiar un tiquet</h2><p class="tip">Fes una foto amb el mòbil o tria una imatge. Es llegirà al teu dispositiu, sense enviar la foto al servidor. Revisa els resultats: la lectura pot equivocar-se.</p><label for="receiptfile">Foto del tiquet</label><input id="receiptfile" type="file" accept="image/*" capture="environment"><div class="actions"><button id="scanreceipt" type="button" class="action primary">Llegir tiquet</button><button id="manualreceipt" type="button" class="action">Afegir línia manualment</button></div><p id="receiptstatus" class="tip" role="status"></p><details id="receiptdiagnostic" class="hidden" style="margin-top:9px"><summary>Veure text llegit (per comprovar errors)</summary><pre id="receiptraw" style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:230px;overflow:auto;font-size:12px"></pre></details><div id="receipteditor" class="hidden"><hr><div class="formrow"><div><label for="receiptdate">Data de compra</label><input id="receiptdate" type="date"></div><div><label for="receiptstore">Botiga</label><input id="receiptstore" placeholder="Mercadona"></div></div><p class="tip" style="margin-top:10px">Revisa cada article i relaciona'l amb el producte correcte. Selecciona «Producte nou» si encara no existeix.</p><div id="receiptrows"></div><div class="actions"><button type="button" id="addreceiptrow" class="action">+ Article</button><button type="button" id="confirmreceipt" class="action primary">Confirmar compra</button><button type="button" id="cancelreceipt" class="action warn">Cancel·lar</button></div></div></div><div class="panel"><h2>🛒 Què haig de comprar?</h2><label for="shopfilter">Botiga</label><select id="shopfilter"><option value="">Totes les botigues</option></select><p class="tip">Apareixen els productes sense recanvis o que han arribat al mínim que marquis. Si tens un producte en ús però cap recanvi, pot aparèixer a la llista. El mínim és configurable per producte.</p><button class="action primary" id="copylist">Copiar llista</button></div><div id="shoplist"></div></section>
+<section id="shopping"><div class="panel"><h2>📷 Afegir tiquet o factura</h2><p class="tip">Fes una foto o tria una imatge o PDF des de Fotos, Fitxers o el correu. Es llegirà al dispositiu sense pujar el fitxer a cap servidor. Revisa els resultats: la lectura pot equivocar-se.</p><label>Afegir tiquet o factura</label><div class="actions"><button id="takephoto" type="button" class="action">📷 Fer foto</button><label for="receiptfile" class="action" style="display:inline-flex;align-items:center;font-size:15px;margin:0;cursor:pointer">🗂️ Triar foto o PDF</label></div><input id="receiptcamera" class="hidden" type="file" accept="image/*" capture="environment"><input id="receiptfile" class="hidden" type="file" accept="image/*,.pdf,application/pdf"><p id="receiptchosen" class="tip">Encara no has seleccionat cap fitxer.</p><div class="actions"><button id="scanreceipt" type="button" class="action primary">Llegir tiquet</button><button id="manualreceipt" type="button" class="action">Afegir línia manualment</button></div><p id="receiptstatus" class="tip" role="status"></p><details id="receiptdiagnostic" class="hidden" style="margin-top:9px"><summary>Veure text llegit (per comprovar errors)</summary><pre id="receiptraw" style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:230px;overflow:auto;font-size:12px"></pre></details><div id="receipteditor" class="hidden"><hr><div class="formrow"><div><label for="receiptdate">Data de compra</label><input id="receiptdate" type="date"></div><div><label for="receiptstore">Botiga</label><input id="receiptstore" placeholder="Mercadona"></div></div><p class="tip" style="margin-top:10px">Revisa cada article i relaciona'l amb el producte correcte. Selecciona «Producte nou» si encara no existeix.</p><div id="receiptrows"></div><div class="actions"><button type="button" id="addreceiptrow" class="action">+ Article</button><button type="button" id="confirmreceipt" class="action primary">Confirmar compra</button><button type="button" id="cancelreceipt" class="action warn">Cancel·lar</button></div></div></div><div class="panel"><h2>🛒 Què haig de comprar?</h2><label for="shopfilter">Botiga</label><select id="shopfilter"><option value="">Totes les botigues</option></select><p class="tip">Apareixen els productes sense recanvis o que han arribat al mínim que marquis. Si tens un producte en ús però cap recanvi, pot aparèixer a la llista. El mínim és configurable per producte.</p><button class="action primary" id="copylist">Copiar llista</button></div><div id="shoplist"></div></section>
 <section id="history"><div class="panel"><h2>Històric de preus</h2><p class="tip">Es conserven les compres anteriors; no se sobreescriuen.</p></div><div id="histlist"></div></section>
 <section id="settings"><div class="panel"><h2>Còpia de seguretat</h2><p class="tip">Les dades s'emmagatzemen en aquest navegador, al dispositiu actual. Si esborres les dades del navegador pots perdre els canvis. Exporta una còpia JSON després de cada compra important. Aquesta versió no sincronitza dispositius.</p><div class="actions"><button id="export" class="action primary">Descarregar còpia JSON</button><button id="importbtn" class="action">Importar còpia JSON</button><input type="file" accept="application/json,.json" id="file" class="hidden"></div><p id="savedstatus" class="tip"></p></div><div class="panel"><h2>Afegir producte</h2><div class="formrow"><div class="full"><label>Nom</label><input id="newname" placeholder="Ex: Paper de cuina"></div><div><label>Categoria</label><input id="newcat" placeholder="Higiene"></div><div><label>Botiga habitual</label><input id="newshop" placeholder="Mercadona"></div><div><label>Recanvis</label><input id="newstock" type="number" min="0" value="0"></div><div><label>En ús</label><input id="newuse" type="number" min="0" value="0"></div><div><label>Unitat</label><input id="newunit" placeholder="ampolles" value="unitats"></div><div><label>Mínim al magatzem</label><input id="newmin" type="number" min="0" value="0"></div><div class="full"><button class="action primary" id="addnew">Afegir producte</button></div></div></div><div class="panel"><h2>Sobre aquesta versió</h2><p class="tip">Aplicació privada al teu dispositiu. Per recuperar el teu inventari, importa el fitxer privat des de la pestanya Dades. No pengis mai el fitxer JSON amb l’inventari a un web públic.</p></div></section>
-<footer>Versió de prova 1.4 · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
+<footer>Versió de prova 1.6 · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
 <script>const INITIAL={"schema": 1, "updated": "", "items": [], "history": [], "movements": []};
 let db;const KEY='magatzem-casa-v1';try{db=JSON.parse(localStorage.getItem(KEY))||structuredClone(INITIAL)}catch(e){db=structuredClone(INITIAL)}
 const $=x=>document.getElementById(x);function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function money(n){return Number(n||0).toLocaleString('ca-ES',{style:'currency',currency:'EUR'})}function toast(s){let e=$('toast');e.textContent=s;e.style.display='block';clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.style.display='none',2300)}function save(){try{localStorage.setItem(KEY,JSON.stringify(db));$('savedstatus').textContent='Canvis desats en aquest navegador.'}catch(e){alert('No s’ha pogut desar. Exporta una còpia JSON.')}render()}
@@ -28,7 +28,7 @@ $('receiptdate').value=receiptDateToday();
 // Parse only verifiable name + price combinations. Uncertain OCR is shown for review,
 // never silently turned into confirmed inventory or invented prices.
 function receiptPrice(s){const n=Number(String(s).replace(/\s/g,'').replace(',','.'));return Number.isFinite(n)&&n>=0&&n<100000?Math.round(n*100)/100:null}
-function receiptAmount(line){const m=line.match(/(?:^|\s)(\d{1,5}[,.]\d{2})\s*(?:€|eur)?\s*$/i);return m?{value:receiptPrice(m[1]),start:m.index+(m[0].length-m[0].trimStart().length)}:null}
+function receiptAmount(line){const m=line.match(/(?:^|\s)(\d{1,5}[,.]\d{2})\s*(?:€|eur|[$|!])?\s*$/i);return m?{value:receiptPrice(m[1]),start:m.index+(m[0].length-m[0].trimStart().length)}:null}
 function receiptIsNoise(line){return /^(?:total|subtotal|iva\b|base\b|quota\b|canvi|cambio|tarjeta|targeta|efectivo|visa\b|importe|pagad|descompte|dto\b|descuento|torn\b|su compra|gracias|factura|cif\b|nif\b|fecha|data\b|hora\b|num\b|terminal|ticket|tiquet|euros|retorno|pago|paga|aut\b|arc\b|telefon|tel[eé]f|op\b|mercadona|cl\b|sant\b|descripci[oó]|p\.?\s*unit|imp\.?\b|aplicaci|mastercard|\d{1,2}%|\*+|[-—_=]+)/i.test(line)}
 function extractReceipt(text,allowUnpriced=false){
  const lines=String(text||'').split(/\r?\n/).map(x=>x.replace(/[|¦]/g,' ').replace(/\s+/g,' ').trim()).filter(Boolean);
@@ -62,6 +62,26 @@ function extractReceipt(text,allowUnpriced=false){
  }
  return {rows:rows.slice(0,80),store,date,possible:possible.slice(0,40),raw:String(text||'').slice(0,15000)};
 }
+// Un priced rows are candidates, never silently set to 0 €. Only scan the article band.
+function extractReceiptCandidates(text){
+ const rows=[];
+ for(let original of String(text||'').split(/\r?\n/)){
+  const line=original.replace(/[|¦]/g,' ').replace(/\s+/g,' ').trim();
+  if(!line||receiptIsNoise(line)||/\b(?:IVA|FACTURA|BASE|TOTAL|CUOTA|BANCARIA|AUT:|ARC:|TARJETA)\b/i.test(line))continue;
+  // A receipt article normally begins with its quantity. Do not treat unlabelled prices as articles.
+  const m=line.match(/^[1Il|] ?\s*([A-Za-zÀ-ÿ][^\n]{3,80})$/);
+  if(!m)continue;
+  let raw=m[1].replace(/^[^A-Za-zÀ-ÿ]+/,'').trim();
+  const amount=receiptAmount(' '+raw);
+  let name=amount?raw.slice(0,amount.start-1).trim():raw;
+  name=name.replace(/\s+(?:\d[,.]\d{2}|\d{2,4})\s*[\$€!|]?\s*$/,'').trim();
+  if(!/[A-Za-zÀ-ÿ]{3}/.test(name)||name.length<5||name.length>65)continue;
+  // Reject obvious noise; do not replace previously identified exact articles.
+  if(receiptIsNoise(name)||name.split(/\s+/).length<2)continue;
+  rows.push({name,qty:1,total:amount?amount.value:null,productId:bestReceiptMatch(name)});
+ }
+ return rows;
+}
 function bestReceiptMatch(name){const key=receiptNormalize(name);if(!key)return '';
  const exact=db.items.find(p=>receiptNormalize(p.name)===key);if(exact)return exact.id;
  // Conservative suggestion only, so abbreviated supermarket labels can be reviewed.
@@ -73,7 +93,7 @@ function receiptOptions(value){return '<option value="">— Producte nou / sense
 function renderReceiptDraft(){const target=$('receiptrows');target.innerHTML=receiptDraft.rows.map((r,i)=>`<div class="receipt-row" data-receipt-row="${i}"><div class="formrow"><div class="full"><label>Producte llegit (editable)</label><input class="receipt-name" value="${safe(r.name)}" placeholder="Nom del producte"></div><div class="full"><label>Relacionar amb l'inventari</label><select class="receipt-product">${receiptOptions(r.productId)}</select></div><div><label>Quantitat</label><input type="number" min="1" step="1" class="receipt-qty" value="${r.qty}"></div><div><label>Preu TOTAL (€)</label><input type="number" min="0" step="0.01" class="receipt-total" value="${r.total===null?'':r.total}"></div></div><div class="actions"><button class="action" type="button" data-remove-receipt="${i}">Treure article</button></div></div>`).join('')||'<p class="tip">No s’han detectat articles fiables. Afegeix-los manualment.</p>'; $('receipteditor').classList.remove('hidden')}
 function readReceiptDraft(){const rows=[...document.querySelectorAll('[data-receipt-row]')];return rows.map(el=>({name:el.querySelector('.receipt-name').value.trim(),productId:el.querySelector('.receipt-product').value,qty:Number(el.querySelector('.receipt-qty').value),total:el.querySelector('.receipt-total').value.trim()===''?null:Number(el.querySelector('.receipt-total').value)}))}
 function receiptPushRow(){receiptDraft.rows=readReceiptDraft();receiptDraft.rows.push({name:'',productId:'',qty:1,total:null});renderReceiptDraft()}
-function resetReceipt(){receiptDraft.rows=[];receiptDraft.photoId=null;$('receiptfile').value='';$('receipteditor').classList.add('hidden');$('receiptrows').innerHTML='';$('receiptstatus').textContent='';$('receiptdiagnostic').classList.add('hidden');$('receiptraw').textContent='';}
+function resetReceipt(){receiptDraft.rows=[];receiptDraft.photoId=null;$('receiptfile').value='';$('receiptcamera').value='';selectedReceiptFile=null;$('receiptchosen').textContent='Encara no has seleccionat cap fitxer.';$('receipteditor').classList.add('hidden');$('receiptrows').innerHTML='';$('receiptstatus').textContent='';$('receiptdiagnostic').classList.add('hidden');$('receiptraw').textContent='';}
 function loadOCR(){return new Promise((resolve,reject)=>{if(window.Tesseract)return resolve(window.Tesseract);const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';sc.onload=()=>window.Tesseract?resolve(window.Tesseract):reject(Error('No s’ha carregat el lector OCR'));sc.onerror=()=>reject(Error('No hi ha connexió amb el lector OCR gratuït'));document.head.appendChild(sc)})}
 async function receiptArticlesImage(file){
  // Concentra l'OCR en les línies de productes, evitant capçalera, codi de barres i pagament.
@@ -81,7 +101,7 @@ async function receiptArticlesImage(file){
  // com a font per a la data i botiga. Sense enviar la imatge a cap servidor.
  const bitmap=await createImageBitmap(file), w=bitmap.width,h=bitmap.height;
  const isTall=h>w*1.1;
- const left=isTall?.16:.05, top=isTall?.315:.19, right=isTall?.79:.95, bottom=isTall?.575:.83;
+ const left=isTall?.17:.05, top=isTall?.315:.19, right=isTall?.83:.95, bottom=isTall?.59:.83;
  const sx=Math.round(w*left),sy=Math.round(h*top),sw=Math.round(w*(right-left)),sh=Math.round(h*(bottom-top));
  const scale=Math.min(3,Math.max(1.6,1500/sw));
  const canvas=document.createElement('canvas');canvas.width=Math.round(sw*scale);canvas.height=Math.round(sh*scale);
@@ -89,35 +109,65 @@ async function receiptArticlesImage(file){
  if(bitmap.close)bitmap.close();
  const pixels=ctx.getImageData(0,0,canvas.width,canvas.height), a=pixels.data;
  // Contrast moderat: els números petits de la columna d'import poden ser febles.
- for(let i=0;i<a.length;i+=4){let gray=.299*a[i]+.587*a[i+1]+.114*a[i+2];gray=Math.max(0,Math.min(255,(gray-135)*1.32+145));a[i]=a[i+1]=a[i+2]=gray}
+ for(let i=0;i<a.length;i+=4){let gray=.299*a[i]+.587*a[i+1]+.114*a[i+2];gray=Math.max(0,Math.min(255,(gray-135)*1.13+142));a[i]=a[i+1]=a[i+2]=gray}
  ctx.putImageData(pixels,0,0);
  return canvas;
 }
 async function shaPhoto(file){const buffer=await file.arrayBuffer();const digest=await crypto.subtle.digest('SHA-256',buffer);return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-$('receiptfile').addEventListener('change',()=>{$('receiptstatus').textContent='';$('receiptdiagnostic').classList.add('hidden');});
-$('scanreceipt').onclick=async()=>{const file=$('receiptfile').files[0];if(!file)return toast('Tria una fotografia del tiquet');if(receiptDraft.busy)return;
+let selectedReceiptFile=null;
+function selectReceiptFile(input){const file=input.files&&input.files[0];if(!file)return;const isPdf=file.type==='application/pdf'||/\.pdf$/i.test(file.name);if(!isPdf&&!file.type.startsWith('image/')){toast('Només fotografies o PDF');return}selectedReceiptFile=file;$('receiptchosen').textContent='Fitxer seleccionat: '+file.name;$('receiptstatus').textContent='';$('receiptdiagnostic').classList.add('hidden');$('receiptfile').value=input.id==='receiptfile'?$('receiptfile').value:'';$('receiptcamera').value=input.id==='receiptcamera'?$('receiptcamera').value:'';}
+$('takephoto').onclick=()=>$('receiptcamera').click();
+$('receiptfile').addEventListener('change',e=>selectReceiptFile(e.target));
+$('receiptcamera').addEventListener('change',e=>selectReceiptFile(e.target));
+function loadPdfJs(){return new Promise((resolve,reject)=>{if(window.pdfjsLib)return resolve(window.pdfjsLib);const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';sc.onload=()=>{if(!window.pdfjsLib)return reject(Error('No s’ha carregat el lector PDF'));window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';resolve(window.pdfjsLib)};sc.onerror=()=>reject(Error('No hi ha connexió amb la biblioteca PDF gratuïta'));document.head.appendChild(sc)})}
+function linesFromPdfItems(items){const rows=[];for(const item of items){if(!item.str||!item.str.trim())continue;const x=item.transform[4],y=item.transform[5];let row=rows.find(r=>Math.abs(r.y-y)<3.5);if(!row){row={y,parts:[]};rows.push(row)}row.parts.push({x,str:item.str})}return rows.sort((a,b)=>b.y-a.y).map(r=>r.parts.sort((a,b)=>a.x-b.x).map(p=>p.str).join(' ')).join('\n')}
+async function readPdf(file){const pdfjs=await loadPdfJs();const bytes=new Uint8Array(await file.arrayBuffer());const pdf=await pdfjs.getDocument({data:bytes}).promise;const pages=Math.min(pdf.numPages,3);const list=[];for(let i=1;i<=pages;i++){const page=await pdf.getPage(i),content=await page.getTextContent();let text=linesFromPdfItems(content.items);const viewport=page.getViewport({scale:Math.min(2,1700/page.getViewport({scale:1}).width)});const canvas=document.createElement('canvas');canvas.width=Math.round(viewport.width);canvas.height=Math.round(viewport.height);await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;list.push({text,canvas})}return list}
+
+$('scanreceipt').onclick=async()=>{const file=selectedReceiptFile;if(!file)return toast('Fes una foto o tria un fitxer');if(receiptDraft.busy)return;
  receiptDraft.busy=true;$('scanreceipt').disabled=true;$('receiptstatus').textContent='Llegint la imatge… pot trigar una mica al mòbil.';
  let worker=null;
  try{
-  receiptDraft.photoId=await shaPhoto(file);const tess=await loadOCR();worker=await tess.createWorker('spa');
-  const output=await worker.recognize(file);const full=extractReceipt(output.data.text||'');
-  let parsed=full;
-  // Evitem confondre el número de factura o el pagament amb els articles.
-  // Segon intent sobre la zona central del tiquet, amb Tesseract en mode bloc de text.
-  if(full.rows.length<5){
-   $('receiptstatus').textContent='Llegint la zona dels articles, sense capçalera ni pagament…';
-   const articles=await receiptArticlesImage(file);
-   await worker.setParameters({tessedit_pageseg_mode:'6'});
-   const second=await worker.recognize(articles);
-   const focused=extractReceipt(second.data.text||'',true);
-   if(focused.rows.length>full.rows.length){parsed=focused;parsed.store=full.store||focused.store;parsed.date=full.date||focused.date;}
-   parsed.raw='--- TIQUET COMPLET ---\n'+(output.data.text||'')+'\n\n--- ZONA D’ARTICLES ---\n'+(second.data.text||'');
+  receiptDraft.photoId=await shaPhoto(file);
+  const isPdf=file.type==='application/pdf'||/\.pdf$/i.test(file.name);
+  let parsed;
+  if(isPdf){
+   $('receiptstatus').textContent='Obrint el PDF i llegint-ne el text…';
+   const pages=await readPdf(file);const nativeText=pages.map(p=>p.text).join('\n');
+   parsed=extractReceipt(nativeText);
+   let raw='--- TEXT DEL PDF ---\n'+nativeText;
+   if(parsed.rows.length<5){
+    $('receiptstatus').textContent='El PDF conté poc text útil. Provant OCR a les pàgines…';
+    const tess=await loadOCR();worker=await tess.createWorker('spa');
+    for(const p of pages){
+     const output=await worker.recognize(p.canvas);const txt=output.data.text||'';raw+='\n\n--- OCR PDF ---\n'+txt;
+     const fromOcr=extractReceipt(txt,true);
+     const candidates=extractReceiptCandidates(txt);
+     const seen=new Set(parsed.rows.map(r=>receiptNormalize(r.name)));
+     for(const r of [...fromOcr.rows,...candidates]){const key=receiptNormalize(r.name);if(key&&!seen.has(key)){seen.add(key);parsed.rows.push(r)}}
+     if(!parsed.store)parsed.store=fromOcr.store;
+    }
+   }
+   parsed.raw=raw;
+  } else {
+   const tess=await loadOCR();worker=await tess.createWorker('spa');
+   const output=await worker.recognize(file);const full=extractReceipt(output.data.text||'');parsed=full;
+   if(full.rows.length<5){
+    $('receiptstatus').textContent='Llegint la zona dels articles, sense capçalera ni pagament…';
+    const articles=await receiptArticlesImage(file);await worker.setParameters({tessedit_pageseg_mode:'6'});
+    const second=await worker.recognize(articles);
+    const focused=extractReceipt(second.data.text||'',true);
+    const candidates=extractReceiptCandidates(second.data.text||'');
+    const combined=[],keys=new Set();
+    for(const r of [...focused.rows,...candidates]){const key=receiptNormalize(r.name);if(!key||keys.has(key))continue;keys.add(key);combined.push(r)}
+    if(combined.length>full.rows.length)parsed={...focused,rows:combined,store:full.store||focused.store,date:full.date||focused.date};
+    parsed.raw='--- TIQUET COMPLET ---\n'+(output.data.text||'')+'\n\n--- ZONA D’ARTICLES ---\n'+(second.data.text||'');
+   }
   }
   receiptDraft.rows=parsed.rows;$('receiptstore').value=parsed.store;$('receiptdate').value=parsed.date;renderReceiptDraft();
   $('receiptraw').textContent=parsed.raw||'El reconeixement no ha extret text.';
   $('receiptdiagnostic').classList.remove('hidden');
   $('receiptstatus').textContent=parsed.rows.length?
-   `${parsed.rows.length} article(s) candidat(s). Revisa TOTS els imports: la lectura automàtica pot confondre 3,50 amb 3,30. No confirmis fins que coincideixin amb el tiquet.`:
+   `${parsed.rows.length} article(s) candidat(s). Si el preu està buit, l'OCR no l'ha pogut llegir. Revisa noms i imports amb el tiquet abans de confirmar.`:
    'No s’ha pogut identificar cap article amb prou fiabilitat. Obre «Veure text llegit», prova una foto més nítida o afegeix articles manualment.';
  }
  catch(e){$('receiptstatus').textContent='No s’ha pogut llegir automàticament: '+e.message+'. Pots afegir els articles manualment.';receiptDraft.rows=[];$('receiptdiagnostic').classList.add('hidden');renderReceiptDraft()}
