@@ -1,0 +1,14 @@
+name: Auditoria Superfudis
+on:
+  push:
+    branches: [auditoria-superfudis]
+permissions:
+  contents: read
+jobs:
+  prova:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Consulta real
+        run: |
+          curl --fail-with-body --max-time 90 -sS -H 'Content-Type: application/json' -d '{"items":[{"query":"Detergente Marsella Bosque Verde","quantity":1},{"query":"Abrillantador lavavajillas Bosque Verde","quantity":1}],"retailers":["Mercadona"],"include_delivery":false}' https://supercomparador-i9tw.onrender.com/api/v1/compare-basket
