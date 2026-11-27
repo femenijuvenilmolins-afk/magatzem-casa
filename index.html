@@ -9,7 +9,7 @@
 <section id="history"><div class="panel"><h2>Històric de preus</h2><p class="tip">Es conserven les compres anteriors; no se sobreescriuen.</p></div><div id="histlist"></div></section>
 <section id="settings"><div class="panel"><h2>Còpia de seguretat</h2><p class="tip">Les dades s'emmagatzemen en aquest navegador, al dispositiu actual. Si esborres les dades del navegador pots perdre els canvis. Exporta una còpia JSON després de cada compra important. Aquesta versió no sincronitza dispositius.</p><div class="actions"><button id="export" class="action primary">Descarregar còpia JSON</button><button id="importbtn" class="action">Importar còpia JSON</button><input type="file" accept="application/json,.json" id="file" class="hidden"></div><p id="savedstatus" class="tip"></p></div><div class="panel"><h2>Afegir producte</h2><div class="formrow"><div class="full"><label>Nom</label><input id="newname" placeholder="Ex: Paper de cuina"></div><div><label>Categoria</label><input id="newcat" placeholder="Higiene"></div><div><label>Botiga habitual</label><input id="newshop" placeholder="Mercadona"></div><div><label>Recanvis</label><input id="newstock" type="number" min="0" value="0"></div><div><label>En ús</label><input id="newuse" type="number" min="0" value="0"></div><div><label>Unitat</label><input id="newunit" placeholder="ampolles" value="unitats"></div><div><label>Mínim al magatzem</label><input id="newmin" type="number" min="0" value="0"></div><div class="full"><button class="action primary" id="addnew">Afegir producte</button></div></div></div><div class="panel"><h2>Sobre aquesta versió</h2><p class="tip">Aplicació privada al teu dispositiu. Per recuperar el teu inventari, importa el fitxer privat des de la pestanya Dades. No pengis mai el fitxer JSON amb l’inventari a un web públic.</p></div></section>
 <footer>Versió de prova 1.8.8 DIAGNÒSTIC — imports OCR revisables · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
-<script>const INITIAL={"schema": 1, "updated": "", "items": [], "history": [], "movements": []};
+<script src="./amazon-pdf-parser.js"></script><script>const INITIAL={"schema": 1, "updated": "", "items": [], "history": [], "movements": []};
 let db;const KEY='magatzem-casa-v1';try{db=JSON.parse(localStorage.getItem(KEY))||structuredClone(INITIAL)}catch(e){db=structuredClone(INITIAL)}
 const $=x=>document.getElementById(x);function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function money(n){return Number(n||0).toLocaleString('ca-ES',{style:'currency',currency:'EUR'})}function toast(s){let e=$('toast');e.textContent=s;e.style.display='block';clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.style.display='none',2300)}function save(){try{localStorage.setItem(KEY,JSON.stringify(db));$('savedstatus').textContent='Canvis desats en aquest navegador.'}catch(e){alert('No s’ha pogut desar. Exporta una còpia JSON.')}render()}
 function log(id,kind,amount){db.movements.push({date:new Date().toISOString(),id,kind,amount})}function setQty(id,field,delta){let x=db.items.find(x=>x.id===id);if(!x)return;if(x[field]+delta<0)return toast('No pots baixar de zero');x[field]+=delta;log(id,field,delta);save()}
@@ -379,9 +379,10 @@ $('scanreceipt').onclick=async()=>{const file=selectedReceiptFile;if(!file)retur
   if(isPdf){
    $('receiptstatus').textContent='Obrint el PDF i llegint-ne el text…';
    const pages=await readPdf(file);const nativeText=pages.map(p=>p.text).join('\n');
-   parsed=extractReceipt(nativeText);
+   const amazon=extractAmazonInvoice(nativeText);
+   parsed=amazon||extractReceipt(nativeText);
    let raw='--- TEXT DEL PDF ---\n'+nativeText;
-   if(parsed.rows.length<5){
+   if(!amazon&&parsed.rows.length<5){
     $('receiptstatus').textContent='El PDF conté poc text útil. Provant OCR a les pàgines…';
     const tess=await loadOCR();worker=await tess.createWorker('spa');
     for(const p of pages){
@@ -392,7 +393,7 @@ $('scanreceipt').onclick=async()=>{const file=selectedReceiptFile;if(!file)retur
      if(!parsed.store)parsed.store=fromOcr.store;
     }
    }
-   parsed.raw=raw;
+   parsed.raw=amazon?amazon.raw:raw;
   } else {
    const tess=await loadOCR();worker=await tess.createWorker('spa');
    const output=await worker.recognize(file,{}, {text:true,tsv:true});const full=extractReceipt(output.data.text||'');parsed=full;
