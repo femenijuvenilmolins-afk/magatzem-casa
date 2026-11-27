@@ -8,7 +8,7 @@
 <section id="shopping"><div class="panel"><h2>📷 Afegir tiquet o factura</h2><p class="tip">Fes una foto o tria una imatge o PDF des de Fotos, Fitxers o el correu. Es llegirà al dispositiu sense pujar el fitxer a cap servidor. Revisa els resultats: la lectura pot equivocar-se.</p><label>Afegir tiquet o factura</label><div class="actions"><button id="takephoto" type="button" class="action">📷 Fer foto</button><label for="receiptfile" class="action" style="display:inline-flex;align-items:center;font-size:15px;margin:0;cursor:pointer">🗂️ Triar foto o PDF</label></div><input id="receiptcamera" class="hidden" type="file" accept="image/*" capture="environment"><input id="receiptfile" class="hidden" type="file" accept="image/*,.pdf,application/pdf"><p id="receiptchosen" class="tip">Encara no has seleccionat cap fitxer.</p><div class="actions"><button id="scanreceipt" type="button" class="action primary">Llegir tiquet</button><button id="manualreceipt" type="button" class="action">Afegir línia manualment</button></div><p id="receiptstatus" class="tip" role="status"></p><details id="receiptdiagnostic" class="hidden" style="margin-top:9px"><summary>Veure text llegit (per comprovar errors)</summary><pre id="receiptraw" style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:230px;overflow:auto;font-size:12px"></pre></details><div id="receipteditor" class="hidden"><hr><div class="formrow"><div><label for="receiptdate">Data de compra</label><input id="receiptdate" type="date"></div><div><label for="receiptstore">Botiga</label><input id="receiptstore" placeholder="Mercadona"></div></div><p class="tip" style="margin-top:10px">Revisa cada article i relaciona'l amb el producte correcte. Selecciona «Producte nou» si encara no existeix.</p><div id="receiptrows"></div><div class="actions"><button type="button" id="addreceiptrow" class="action">+ Article</button><button type="button" id="confirmreceipt" class="action primary">Confirmar compra</button><button type="button" id="cancelreceipt" class="action warn">Cancel·lar</button></div></div></div><div class="panel"><h2>🛒 Què haig de comprar?</h2><label for="shopfilter">Botiga</label><select id="shopfilter"><option value="">Totes les botigues</option></select><p class="tip">Apareixen els productes sense recanvis o que han arribat al mínim que marquis. Si tens un producte en ús però cap recanvi, pot aparèixer a la llista. El mínim és configurable per producte.</p><button class="action primary" id="copylist">Copiar llista</button></div><div id="shoplist"></div></section>
 <section id="history"><div class="panel"><h2>Històric de preus</h2><p class="tip">Es conserven les compres anteriors; no se sobreescriuen.</p></div><div id="histlist"></div></section>
 <section id="settings"><div class="panel"><h2>Còpia de seguretat</h2><p class="tip">Les dades s'emmagatzemen en aquest navegador, al dispositiu actual. Si esborres les dades del navegador pots perdre els canvis. Exporta una còpia JSON després de cada compra important. Aquesta versió no sincronitza dispositius.</p><div class="actions"><button id="export" class="action primary">Descarregar còpia JSON</button><button id="importbtn" class="action">Importar còpia JSON</button><input type="file" accept="application/json,.json" id="file" class="hidden"></div><p id="savedstatus" class="tip"></p></div><div class="panel"><h2>Afegir producte</h2><div class="formrow"><div class="full"><label>Nom</label><input id="newname" placeholder="Ex: Paper de cuina"></div><div><label>Categoria</label><input id="newcat" placeholder="Higiene"></div><div><label>Botiga habitual</label><input id="newshop" placeholder="Mercadona"></div><div><label>Recanvis</label><input id="newstock" type="number" min="0" value="0"></div><div><label>En ús</label><input id="newuse" type="number" min="0" value="0"></div><div><label>Unitat</label><input id="newunit" placeholder="ampolles" value="unitats"></div><div><label>Mínim al magatzem</label><input id="newmin" type="number" min="0" value="0"></div><div class="full"><button class="action primary" id="addnew">Afegir producte</button></div></div></div><div class="panel"><h2>Sobre aquesta versió</h2><p class="tip">Aplicació privada al teu dispositiu. Per recuperar el teu inventari, importa el fitxer privat des de la pestanya Dades. No pengis mai el fitxer JSON amb l’inventari a un web públic.</p></div></section>
-<footer>Versió de prova 1.8.4 — imports OCR revisables · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
+<footer>Versió de prova 1.8.5 — imports OCR revisables · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
 <script>const INITIAL={"schema": 1, "updated": "", "items": [], "history": [], "movements": []};
 let db;const KEY='magatzem-casa-v1';try{db=JSON.parse(localStorage.getItem(KEY))||structuredClone(INITIAL)}catch(e){db=structuredClone(INITIAL)}
 const $=x=>document.getElementById(x);function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function money(n){return Number(n||0).toLocaleString('ca-ES',{style:'currency',currency:'EUR'})}function toast(s){let e=$('toast');e.textContent=s;e.style.display='block';clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.style.display='none',2300)}function save(){try{localStorage.setItem(KEY,JSON.stringify(db));$('savedstatus').textContent='Canvis desats en aquest navegador.'}catch(e){alert('No s’ha pogut desar. Exporta una còpia JSON.')}render()}
@@ -196,6 +196,42 @@ function receiptGeometryFromTsv(tsv){
 }
 
 
+// OCR on the complete price strip: independent of the product-description OCR.
+// Align only if the number of receipt rows and at least four independently read prices agree.
+// Existing prices are never overwritten; low-confidence proposals require review.
+async function receiptRecoverColumnPrices(worker,articles,rows){
+ if(rows.length<3||!rows.some(r=>r.total===null))return rows;
+ const sx=Math.round(articles.width*.73),sy=Math.round(articles.height*.065);
+ const sw=Math.round(articles.width*.17),sh=Math.round(articles.height*.68);
+ const canvas=document.createElement('canvas');canvas.width=sw;canvas.height=sh;
+ const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,sw,sh);
+ ctx.drawImage(articles,sx,sy,sw,sh,0,0,sw,sh);
+ await worker.setParameters({tessedit_pageseg_mode:'6',tessedit_char_whitelist:'0123456789,.'});
+ const result=await worker.recognize(canvas);
+ await worker.setParameters({tessedit_pageseg_mode:'6',tessedit_char_whitelist:''});
+ const lines=String(result.data.text||'').split(/\r?\n/).map(x=>x.replace(/\s/g,'').trim())
+  .filter(x=>/^(?:\d{1,3}[,.]\d{1,3}|\d{3,4})$/.test(x));
+ // Never guess an alignment. This is especially important if the paper has a
+ // discount line, multiple price columns, or a missed item.
+ if(lines.length!==rows.length)return rows;
+ const values=lines.map(x=>/^\d{1,3}[,.]\d{2}$/.test(x)?receiptPrice(x):null);
+ let matches=0,conflicts=0;
+ for(let i=0;i<rows.length;i++){
+  if(rows[i].total===null||values[i]===null)continue;
+  if(Math.abs(rows[i].total-values[i])<.005)matches++;
+  else conflicts++;
+ }
+ if(matches<4||conflicts>2)return rows;
+ for(let i=0;i<rows.length;i++){
+  if(rows[i].total!==null||values[i]===null)continue;
+  // A second pass is a proposal, never a verified purchase amount.
+  rows[i].total=values[i];
+  rows[i].priceEvidence=lines[i]+' (columna independent)';
+  rows[i].priceConfidence=55;
+ }
+ return rows;
+}
+
 // Rescue missing prices using their physical position, never by matching known product prices.
 // This attempts OCR on a small region of the right-hand price column only.
 async function receiptRecoverPrices(worker,articles,tsv,rows){
@@ -322,6 +358,7 @@ $('scanreceipt').onclick=async()=>{const file=selectedReceiptFile;if(!file)retur
     const second=await worker.recognize(articles,{}, {text:true,tsv:true});
     const geometry=receiptGeometryFromTsv(second.data.tsv||'');
     if(geometry.length>=3)await receiptRecoverPrices(worker,articles,second.data.tsv||'',geometry);
+    if(geometry.length>=3)await receiptRecoverColumnPrices(worker,articles,geometry);
     const focused=extractReceipt(second.data.text||'',true);
     const candidates=extractReceiptCandidates(second.data.text||'');
     // An OCR word-position row is a physical line; do NOT merge multiple readings
