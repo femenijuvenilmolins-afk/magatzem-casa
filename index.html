@@ -8,7 +8,7 @@
 <section id="shopping"><div class="panel"><h2>📷 Afegir tiquet o factura</h2><p class="tip">Fes una foto o tria una imatge o PDF des de Fotos, Fitxers o el correu. Es llegirà al dispositiu sense pujar el fitxer a cap servidor. Revisa els resultats: la lectura pot equivocar-se.</p><label>Afegir tiquet o factura</label><div class="actions"><button id="takephoto" type="button" class="action">📷 Fer foto</button><label for="receiptfile" class="action" style="display:inline-flex;align-items:center;font-size:15px;margin:0;cursor:pointer">🗂️ Triar foto o PDF</label></div><input id="receiptcamera" class="hidden" type="file" accept="image/*" capture="environment"><input id="receiptfile" class="hidden" type="file" accept="image/*,.pdf,application/pdf"><p id="receiptchosen" class="tip">Encara no has seleccionat cap fitxer.</p><div class="actions"><button id="scanreceipt" type="button" class="action primary">Llegir tiquet</button><button id="manualreceipt" type="button" class="action">Afegir línia manualment</button></div><p id="receiptstatus" class="tip" role="status"></p><details id="receiptdiagnostic" class="hidden" style="margin-top:9px"><summary>Veure text llegit (per comprovar errors)</summary><pre id="receiptraw" style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:230px;overflow:auto;font-size:12px"></pre></details><div id="receipteditor" class="hidden"><hr><div class="formrow"><div><label for="receiptdate">Data de compra</label><input id="receiptdate" type="date"></div><div><label for="receiptstore">Botiga</label><input id="receiptstore" placeholder="Mercadona"></div></div><p class="tip" style="margin-top:10px">Revisa cada article i relaciona'l amb el producte correcte. Selecciona «Producte nou» si encara no existeix.</p><div id="receiptrows"></div><div class="actions"><button type="button" id="addreceiptrow" class="action">+ Article</button><button type="button" id="confirmreceipt" class="action primary">Confirmar compra</button><button type="button" id="cancelreceipt" class="action warn">Cancel·lar</button></div></div></div><div class="panel"><h2>🛒 Què haig de comprar?</h2><label for="shopfilter">Botiga</label><select id="shopfilter"><option value="">Totes les botigues</option></select><p class="tip">Apareixen els productes sense recanvis o que han arribat al mínim que marquis. Si tens un producte en ús però cap recanvi, pot aparèixer a la llista. El mínim és configurable per producte.</p><button class="action primary" id="copylist">Copiar llista</button></div><div id="shoplist"></div></section>
 <section id="history"><div class="panel"><h2>Històric de preus</h2><p class="tip">Es conserven les compres anteriors; no se sobreescriuen.</p></div><div id="histlist"></div></section>
 <section id="settings"><div class="panel"><h2>Còpia de seguretat</h2><p class="tip">Les dades s'emmagatzemen en aquest navegador, al dispositiu actual. Si esborres les dades del navegador pots perdre els canvis. Exporta una còpia JSON després de cada compra important. Aquesta versió no sincronitza dispositius.</p><div class="actions"><button id="export" class="action primary">Descarregar còpia JSON</button><button id="importbtn" class="action">Importar còpia JSON</button><input type="file" accept="application/json,.json" id="file" class="hidden"></div><p id="savedstatus" class="tip"></p></div><div class="panel"><h2>Afegir producte</h2><div class="formrow"><div class="full"><label>Nom</label><input id="newname" placeholder="Ex: Paper de cuina"></div><div><label>Categoria</label><input id="newcat" placeholder="Higiene"></div><div><label>Botiga habitual</label><input id="newshop" placeholder="Mercadona"></div><div><label>Recanvis</label><input id="newstock" type="number" min="0" value="0"></div><div><label>En ús</label><input id="newuse" type="number" min="0" value="0"></div><div><label>Unitat</label><input id="newunit" placeholder="ampolles" value="unitats"></div><div><label>Mínim al magatzem</label><input id="newmin" type="number" min="0" value="0"></div><div class="full"><button class="action primary" id="addnew">Afegir producte</button></div></div></div><div class="panel"><h2>Sobre aquesta versió</h2><p class="tip">Aplicació privada al teu dispositiu. Per recuperar el teu inventari, importa el fitxer privat des de la pestanya Dades. No pengis mai el fitxer JSON amb l’inventari a un web públic.</p></div></section>
-<footer>Versió de prova 1.8 — lector experimental · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
+<footer>Versió de prova 1.8.3 — imports OCR revisables · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
 <script>const INITIAL={"schema": 1, "updated": "", "items": [], "history": [], "movements": []};
 let db;const KEY='magatzem-casa-v1';try{db=JSON.parse(localStorage.getItem(KEY))||structuredClone(INITIAL)}catch(e){db=structuredClone(INITIAL)}
 const $=x=>document.getElementById(x);function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function money(n){return Number(n||0).toLocaleString('ca-ES',{style:'currency',currency:'EUR'})}function toast(s){let e=$('toast');e.textContent=s;e.style.display='block';clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.style.display='none',2300)}function save(){try{localStorage.setItem(KEY,JSON.stringify(db));$('savedstatus').textContent='Canvis desats en aquest navegador.'}catch(e){alert('No s’ha pogut desar. Exporta una còpia JSON.')}render()}
@@ -124,10 +124,24 @@ function mergeReceiptCandidates(...sets){
 }
 function bestReceiptMatch(name){const key=receiptNormalize(name);if(!key)return '';
  const exact=db.items.find(p=>receiptNormalize(p.name)===key);if(exact)return exact.id;
- // Conservative suggestion only, so abbreviated supermarket labels can be reviewed.
- const parts=key.split(' ').filter(w=>w.length>=4);if(parts.length<2)return '';
+ const parts=key.split(' ').filter(w=>w.length>=4);
+ if(!parts.length)return '';
  const matches=db.items.filter(p=>{const words=receiptNormalize(p.name).split(' ');return parts.filter(w=>words.some(v=>v===w||(w.length>=5&&v.length>=5&&levenshteinReceipt(w,v)<=2))).length>=2});
- return matches.length===1?matches[0].id:'';
+ if(matches.length===1)return matches[0].id;
+ // A supermarket abbreviation may only contain one recognizable product word.
+ // Match it only when it is distinctive AND exactly one item at this store matches.
+ // Never guess across stores or choose between ambiguous candidates.
+ const store=receiptNormalize($('receiptstore')?.value||'');
+ if(!store||store.length<4)return '';
+ const distinctive=parts.filter(w=>w.length>=8&&!/^(?:integral|natural|producte|product|paquets|unitats|detergent|mercadona)$/.test(w));
+ if(!distinctive.length)return '';
+ const candidates=db.items.filter(p=>{
+  const ps=receiptNormalize(p.store||'');
+  if(ps!==store)return false;
+  const words=receiptNormalize(p.name).split(' ');
+  return distinctive.some(w=>words.includes(w));
+ });
+ return candidates.length===1?candidates[0].id:'';
 }
 // OCR position parser. The words come from Tesseract TSV, not from regex over flat text.
 function receiptGeometryFromTsv(tsv){
@@ -175,14 +189,14 @@ function receiptGeometryFromTsv(tsv){
   if(name.length<5||!/[A-Za-zÀ-ÿ]{3}/.test(name)||receiptIsNoise(name))return null;
   const prices=g.prices.sort((a,b)=>b.confidence-a.confidence);
   const p=prices[0];
-  // Confidence is only a screening measure, not proof that the amount is correct.
-  const total=p&&p.confidence>=85?receiptPrice(p.text):null;
+  // Confidence 65+ gives a proposed amount, NOT a confirmed price. The user must review it before registering the purchase.
+  const total=p&&p.confidence>=65?receiptPrice(p.text):null;
   return {name,qty:1,total,productId:bestReceiptMatch(name),ocrSource:'geometry',priceEvidence:p?.text||'',priceConfidence:p?.confidence||0};
  }).filter(Boolean);
 }
 
 function receiptOptions(value){return '<option value="">— Producte nou / sense relacionar —</option>'+[...db.items].sort((a,b)=>a.name.localeCompare(b.name,'ca')).map(p=>`<option value="${safe(p.id)}" ${p.id===value?'selected':''}>${safe(p.name)}</option>`).join('')}
-function renderReceiptDraft(){const target=$('receiptrows');target.innerHTML=receiptDraft.rows.map((r,i)=>`<div class="receipt-row" data-receipt-row="${i}"><div class="formrow"><div class="full"><label>Producte llegit (editable)</label><input class="receipt-name" value="${safe(r.name)}" placeholder="Nom del producte"></div><div class="full"><label>Relacionar amb l'inventari</label><select class="receipt-product">${receiptOptions(r.productId)}</select></div><div><label>Quantitat</label><input type="number" min="1" step="1" class="receipt-qty" value="${r.qty}"></div><div><label>Preu TOTAL (€)</label><input type="number" min="0" step="0.01" class="receipt-total" value="${r.total===null?'':r.total}">${r.priceEvidence?`<small class="tip">Lectura del preu: ${safe(r.priceEvidence)} · comprova’l al tiquet</small>`:''}</div></div><div class="actions"><button class="action" type="button" data-remove-receipt="${i}">Treure article</button></div></div>`).join('')||'<p class="tip">No s’han detectat articles fiables. Afegeix-los manualment.</p>'; $('receipteditor').classList.remove('hidden')}
+function renderReceiptDraft(){const target=$('receiptrows');target.innerHTML=receiptDraft.rows.map((r,i)=>`<div class="receipt-row" data-receipt-row="${i}"><div class="formrow"><div class="full"><label>Producte llegit (editable)</label><input class="receipt-name" value="${safe(r.name)}" placeholder="Nom del producte"></div><div class="full"><label>Relacionar amb l'inventari</label><select class="receipt-product">${receiptOptions(r.productId)}</select></div><div><label>Quantitat</label><input type="number" min="1" step="1" class="receipt-qty" value="${r.qty}"></div><div><label>Preu TOTAL (€)</label><input type="number" min="0" step="0.01" class="receipt-total" value="${r.total===null?'':r.total}">${r.priceEvidence?`<small class="tip">${r.total!==null&&r.priceConfidence>=85?"OCR: ":"OCR per revisar: "}${safe(r.priceEvidence)}${r.priceConfidence?` (confiança ${Math.round(r.priceConfidence)}/100)`:""} · comprova’l al tiquet</small>`:''}</div></div><div class="actions"><button class="action" type="button" data-remove-receipt="${i}">Treure article</button></div></div>`).join('')||'<p class="tip">No s’han detectat articles fiables. Afegeix-los manualment.</p>'; $('receipteditor').classList.remove('hidden')}
 function readReceiptDraft(){const rows=[...document.querySelectorAll('[data-receipt-row]')];return rows.map(el=>({name:el.querySelector('.receipt-name').value.trim(),productId:el.querySelector('.receipt-product').value,qty:Number(el.querySelector('.receipt-qty').value),total:el.querySelector('.receipt-total').value.trim()===''?null:Number(el.querySelector('.receipt-total').value)}))}
 function receiptPushRow(){receiptDraft.rows=readReceiptDraft();receiptDraft.rows.push({name:'',productId:'',qty:1,total:null});renderReceiptDraft()}
 function resetReceipt(){receiptDraft.rows=[];receiptDraft.photoId=null;$('receiptfile').value='';$('receiptcamera').value='';selectedReceiptFile=null;$('receiptchosen').textContent='Encara no has seleccionat cap fitxer.';$('receipteditor').classList.add('hidden');$('receiptrows').innerHTML='';$('receiptstatus').textContent='';$('receiptdiagnostic').classList.add('hidden');$('receiptraw').textContent='';}
@@ -268,7 +282,9 @@ $('scanreceipt').onclick=async()=>{const file=selectedReceiptFile;if(!file)retur
    }
   }
   parsed.rows=parsed.rows.map(receiptCleanCandidate);
-  receiptDraft.rows=parsed.rows;$('receiptstore').value=parsed.store;$('receiptdate').value=parsed.date;renderReceiptDraft();
+  receiptDraft.rows=parsed.rows;$('receiptstore').value=parsed.store;$('receiptdate').value=parsed.date;
+  // Match after the store is known, because OCR matching by store otherwise fails.
+  receiptDraft.rows.forEach(row=>{row.productId=bestReceiptMatch(row.name)});renderReceiptDraft();
   $('receiptraw').textContent=parsed.raw||'El reconeixement no ha extret text.';
   $('receiptdiagnostic').classList.remove('hidden');
   $('receiptstatus').textContent=parsed.rows.length?
@@ -286,6 +302,18 @@ $('confirmreceipt').onclick=()=>{
  if(!shop||!/^\d{4}-\d{2}-\d{2}$/.test(date))return toast('Indica botiga i data');
  for(const r of rows){if(!r.name||!Number.isInteger(r.qty)||r.qty<=0||r.qty>999||r.total===null||!Number.isFinite(r.total)||r.total<0)return toast('Revisa noms, quantitats i preus');if(r.productId&&!db.items.some(p=>p.id===r.productId))return toast('Revisa la vinculació de producte')}
  if(receiptDraft.photoId&&Array.isArray(db.receiptIds)&&db.receiptIds.includes(receiptDraft.photoId))return alert('Aquest mateix tiquet ja es va registrar. No el tornarem a sumar.');
+ // Existing purchases imported from older JSON files may not have a photo fingerprint.
+ // An additional warning prevents accidental repeated stock increments after rescanning.
+ const previouslyRegistered=rows.filter(r=>db.history.some(h=>
+  h.date===date&&receiptNormalize(h.shop)===receiptNormalize(shop)&&
+  Math.abs(Number(h.total)-Number(r.total))<.001&&Number(h.qty||1)===r.qty&&
+  (r.productId&&h.productId===r.productId||
+   receiptNormalize(h.name).split(' ').filter(w=>w.length>=6&&receiptNormalize(r.productId?(db.items.find(p=>p.id===r.productId)||{}).name:r.name).split(' ').includes(w)).length>=1)
+ ));
+ if(previouslyRegistered.length>=2){
+  alert('ATENCIÓ: aquest tiquet sembla una compra ja registrada ('+previouslyRegistered.length+' articles coincideixen amb l’històric del mateix dia). Per evitar duplicar l’estoc, no es registrarà de nou.');
+  return;
+ }
  const summary=rows.map(r=>`${r.qty} × ${r.productId?(db.items.find(p=>p.id===r.productId)||{}).name:r.name}: ${money(r.total)}`).join('\n');
  if(!confirm(`Confirmar la compra a ${shop} (${date})?\n\n${summary}\n\nEs sumaran les unitats al magatzem i es guardaran els preus.`))return;
  const purchaseId='receipt-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
