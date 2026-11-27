@@ -1,6 +1,6 @@
 function extractAmazonInvoice(text){
  const source=String(text||'');
- if(!/amazon\s*(?:eu|\.es)|amazon\.es/i.test(source)||!/detalles del documento/i.test(source))return null;
+ if(!/amazon\s*(?:eu|\.es)|amazon\.es/i.test(source)||!/detalles (?:del documento|de la factura)/i.test(source))return null;
  const lines=source.split(/\r?\n/).map(v=>v.replace(/\s+/g,' ').trim()).filter(Boolean);
  const months={enero:1,febrero:2,marzo:3,abril:4,mayo:5,junio:6,julio:7,agosto:8,septiembre:9,setiembre:9,octubre:10,noviembre:11,diciembre:12};
  let date=receiptDateToday();
@@ -11,7 +11,7 @@ function extractAmazonInvoice(text){
  let inTable=false,invoiceTotal=null,discount=0;
  const products=[];
  for(const line of lines){
-  if(/detalles del documento/i.test(line)){inTable=true;continue}
+  if(/detalles (?:del documento|de la factura)/i.test(line)){inTable=true;continue}
   if(!inTable)continue;
   const totalLine=line.match(/^total\s+(\d{1,6}[,.]\d{2})\s*€\s*$/i);
   if(totalLine){invoiceTotal=receiptPrice(totalLine[1]);break}
