@@ -8,28 +8,41 @@
 <section id="shopping"><div class="panel"><h2>📷 Afegir tiquet o factura</h2><p class="tip">Fes una foto o tria una imatge o PDF des de Fotos, Fitxers o el correu. Es llegirà al dispositiu sense pujar el fitxer a cap servidor. Revisa els resultats: la lectura pot equivocar-se.</p><label>Afegir tiquet o factura</label><div class="actions"><button id="takephoto" type="button" class="action">📷 Fer foto</button><label for="receiptfile" class="action" style="display:inline-flex;align-items:center;font-size:15px;margin:0;cursor:pointer">🗂️ Triar foto o PDF</label></div><input id="receiptcamera" class="hidden" type="file" accept="image/*" capture="environment"><input id="receiptfile" class="hidden" type="file" accept="image/*,.pdf,application/pdf"><p id="receiptchosen" class="tip">Encara no has seleccionat cap fitxer.</p><div class="actions"><button id="scanreceipt" type="button" class="action primary">Llegir tiquet</button><button id="manualreceipt" type="button" class="action">Afegir línia manualment</button></div><p id="receiptstatus" class="tip" role="status"></p><details id="receiptdiagnostic" class="hidden" style="margin-top:9px"><summary>Veure text llegit (per comprovar errors)</summary><pre id="receiptraw" style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:230px;overflow:auto;font-size:12px"></pre><div id="receiptdebug" style="margin-top:10px"></div></details><div id="receipteditor" class="hidden"><hr><div class="formrow"><div><label for="receiptdate">Data de compra</label><input id="receiptdate" type="date"></div><div><label for="receiptstore">Botiga</label><input id="receiptstore" placeholder="Mercadona"></div></div><p class="tip" style="margin-top:10px">Revisa cada article i relaciona'l amb el producte correcte. Selecciona «Producte nou» si encara no existeix.</p><div id="receiptrows"></div><div class="actions"><button type="button" id="addreceiptrow" class="action">+ Article</button><button type="button" id="confirmreceipt" class="action primary">Confirmar compra</button><button type="button" id="cancelreceipt" class="action warn">Cancel·lar</button></div></div></div><div class="panel"><h2>🛒 Què haig de comprar?</h2><label for="shopfilter">Botiga</label><select id="shopfilter"><option value="">Totes les botigues</option></select><p class="tip">Apareixen els productes sense recanvis o que han arribat al mínim que marquis. Si tens un producte en ús però cap recanvi, pot aparèixer a la llista. El mínim és configurable per producte.</p><button class="action primary" id="copylist">Copiar llista</button></div><div id="shoplist"></div></section>
 <section id="history"><div class="panel"><h2>Històric de preus</h2><p class="tip">Es conserven les compres anteriors; no se sobreescriuen.</p></div><div id="histlist"></div></section>
 <section id="settings"><div class="panel"><h2>Còpia de seguretat</h2><p class="tip">Les dades s'emmagatzemen en aquest navegador, al dispositiu actual. Si esborres les dades del navegador pots perdre els canvis. Exporta una còpia JSON després de cada compra important. Aquesta versió no sincronitza dispositius.</p><div class="actions"><button id="export" class="action primary">Descarregar còpia JSON</button><button id="importbtn" class="action">Importar còpia JSON</button><input type="file" accept="application/json,.json" id="file" class="hidden"></div><p id="savedstatus" class="tip"></p></div><div class="panel"><h2>Afegir producte</h2><div class="formrow"><div class="full"><label>Nom</label><input id="newname" placeholder="Ex: Paper de cuina"></div><div><label>Categoria</label><input id="newcat" placeholder="Higiene"></div><div><label>Botiga habitual</label><input id="newshop" placeholder="Mercadona"></div><div><label>Recanvis</label><input id="newstock" type="number" min="0" value="0"></div><div><label>En ús</label><input id="newuse" type="number" min="0" value="0"></div><div><label>Unitat</label><input id="newunit" placeholder="ampolles" value="unitats"></div><div><label>Mínim al magatzem</label><input id="newmin" type="number" min="0" value="0"></div><div class="full"><button class="action primary" id="addnew">Afegir producte</button></div></div></div><div class="panel"><h2>Sobre aquesta versió</h2><p class="tip">Aplicació privada al teu dispositiu. Per recuperar el teu inventari, importa el fitxer privat des de la pestanya Dades. No pengis mai el fitxer JSON amb l’inventari a un web públic.</p></div></section>
-<footer>Versió de prova 1.8.12 — imports OCR revisables · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
+<footer>Versió de prova 1.8.13 — imports OCR revisables · dades locals i exportables · ús privat</footer></main><div id="toast" role="status"></div>
 <script src="./amazon-pdf-parser.js"></script><script>const INITIAL={"schema": 1, "updated": "", "items": [], "history": [], "movements": []};
 let db;const KEY='magatzem-casa-v1';try{db=JSON.parse(localStorage.getItem(KEY))||structuredClone(INITIAL)}catch(e){db=structuredClone(INITIAL)}
 const $=x=>document.getElementById(x);function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function money(n){return Number(n||0).toLocaleString('ca-ES',{style:'currency',currency:'EUR'})}
 
-function unitVolumeMl(name,format=''){
+function unitPackInfo(name,format=''){
  const text=[String(name||''),String(format||'')].join(' ');
- const matches=[...text.matchAll(/(?:^|[^\d])(\d+(?:[,.]\d+)?)\s*(ml|cl|litres?|l)\b/gi)]
-  .map(m=>{const n=Number(m[1].replace(',','.'));const u=m[2].toLowerCase();return Math.round(n*(u==='ml'?1:u==='cl'?10:1000)*100)/100})
-  .filter(n=>n>0&&n<=20000);
- const unique=[...new Set(matches)];
- return unique.length===1?unique[0]:null;
+ const factor=u=>u==='ml'?1:u==='cl'?10:1000;
+ const packRegex=/(\d{1,3})\s*[x×]\s*(\d+(?:[,.]\d+)?)\s*(ml|cl|litres?|l)\b/gi;
+ const packMatches=[...text.matchAll(packRegex)];
+ const sizes=[];
+ for(const m of packMatches){
+  const units=Number(m[1]),size=Number(m[2].replace(',','.'))*factor(m[3].toLowerCase());
+  if(units>=2&&units<=100&&size>0&&size<=20000)sizes.push({volumeMl:units*size,packCount:units});
+ }
+ const others=text.replace(packRegex,' ');
+ for(const m of others.matchAll(/(?:^|[^\d])(\d+(?:[,.]\d+)?)\s*(ml|cl|litres?|l)\b/gi)){
+  const size=Number(m[1].replace(',','.'))*factor(m[2].toLowerCase());
+  if(size>0&&size<=20000)sizes.push({volumeMl:size,packCount:1});
+ }
+ const unique=[...new Set(sizes.map(x=>Math.round(x.volumeMl*100)/100))];
+ if(unique.length!==1)return {volumeMl:null,packCount:1};
+ return {volumeMl:unique[0],packCount:packMatches.length===1?Number(packMatches[0][1]):1};
 }
+function unitVolumeMl(name,format=''){return unitPackInfo(name,format).volumeMl}
 function purchaseMetrics(name,format,qty,total){
- const volumeMl=unitVolumeMl(name,format);
+ const pack=unitPackInfo(name,format),volumeMl=pack.volumeMl;
  if(!Number.isFinite(qty)||qty<=0||!Number.isFinite(total)||total<0)
-  return {unitPrice:null,perLitre:null,volumeMl};
- return {unitPrice:total/qty,perLitre:volumeMl?total/(qty*volumeMl/1000):null,volumeMl};
+  return {unitPrice:null,perLitre:null,volumeMl,packCount:pack.packCount};
+ return {unitPrice:total/qty,perLitre:volumeMl?total/(qty*volumeMl/1000):null,volumeMl,packCount:pack.packCount};
 }
 function unitPriceLabel(m){
  if(m.unitPrice===null)return 'Preu unitari: pendent';
  let text='Preu per unitat: '+money(m.unitPrice);
+ if(m.packCount>1)text+=' (pack de '+m.packCount+') · '+money(m.unitPrice/m.packCount)+'/peça';
  if(m.perLitre!==null)text+=' · '+money(m.perLitre)+'/L';
  return text;
 }
