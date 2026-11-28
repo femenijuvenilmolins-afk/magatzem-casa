@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-11-28T06:12:46.077602+00:00",
+  "runner_network_prefix": "4.155.13.0/24",
+  "robots_allowed": true,
+  "status": 403,
+  "headers": {
+    "Server": "CloudFront",
+    "Content-Type": "text/html",
+    "X-Cache": "Error from cloudfront",
+    "Via": "1.1 33f44c5d40d98734c5ae4147ce95d00c.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Pop": "HIO52-P5"
+  },
+  "body_indicators": {
+    "AWS WAF": false,
+    "CloudFront": true,
+    "Access Denied": false,
+    "Forbidden": false,
+    "Request blocked": true,
+    "captcha": false,
+    "challenge": false
+  },
+  "body_title": [
+    "ERROR: The request could not be satisfied"
+  ]
+}
