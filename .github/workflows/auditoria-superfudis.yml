@@ -1,4 +1,4 @@
-name: Auditoria promocions
+name: Auditoria Bonpreu
 on:
   push:
     branches: [auditoria-superfudis]
@@ -8,44 +8,28 @@ permissions:
 jobs:
   prova:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - run: |
           python - <<'PY'
-          import urllib.request as u,json,datetime,time
-          base='https://tienda.mercadona.es/api/'
-          def get(path):
+          import urllib.request as u, json, datetime, urllib.parse
+          base='https://www.compraonline.bonpreuesclat.cat'
+          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tests':{}}
+          for name,path in [('robots','/robots.txt'),('categories','/api/webproductpagews/v1/categories?categoryDepth=2'),('search','/api/webproductpagews/v6/product-pages/search?q='+urllib.parse.quote('detergent'))]:
               try:
-                  with u.urlopen(u.Request(base+path,headers={'User-Agent':'MagatzemCasa-Audit/1.0'}),timeout=15) as r:return json.load(r)
-              except Exception as e:return {'error':str(e)}
-          root=get('categories/')
-          ids=[]
-          def walk(x):
-              if isinstance(x,dict):
-                  if 'id' in x and 'name' in x and not x.get('categories'):ids.append(x['id'])
-                  for v in x.values():walk(v)
-              elif isinstance(x,list):
-                  for v in x:walk(v)
-          walk(root)
-          products={}
-          errors=[]
-          def collect(x):
-              if isinstance(x,dict):
-                  if 'id' in x and isinstance(x.get('price_instructions'),dict):
-                      p=x['price_instructions'];products[str(x['id'])]={'name':x.get('display_name'),'price':p.get('unit_price'),'previous':p.get('previous_unit_price'),'decreased':p.get('price_decreased')}
-                  for v in x.values():collect(v)
-              elif isinstance(x,list):
-                  for v in x:collect(v)
-          for i in list(dict.fromkeys(ids))[:20]:
-              d=get('categories/'+str(i)+'/')
-              if 'error' in d:errors.append({'id':i,'error':d['error']})
-              collect(d);time.sleep(0.5)
-          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'category_count':len(ids),'products_checked':len(products),'discounts':{k:v for k,v in products.items() if v['decreased'] or v['previous']},'products':products,'errors':errors,'root_error':root.get('error') if isinstance(root,dict) else None}
-          with open('auditoria/promocions.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+                  with u.urlopen(u.Request(base+path,headers={'User-Agent':'MagatzemCasa-Audit/1.0','Accept':'application/json, text/plain'}),timeout=15) as r:
+                      raw=r.read(500000)
+                      try: data=json.loads(raw)
+                      except Exception: data=raw.decode(errors='replace')[:10000]
+                      out['tests'][name]={'status':r.status,'data':data}
+              except Exception as e:
+                  out['tests'][name]={'error':str(e)}
+                  if '403' in str(e) or '429' in str(e):break
+          with open('auditoria/bonpreu.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/promocions.json
-          git commit -m 'Evidencia promocions cataleg'
+          git add auditoria/bonpreu.json
+          git commit -m 'Evidencia consulta Bonpreu'
           git push origin HEAD:auditoria-superfudis
