@@ -1,11 +1,8 @@
 {
-  "timestamp": "2026-11-28T05:47:41.343715+00:00",
+  "timestamp": "2026-11-28T05:48:02.502702+00:00",
   "tests": {
     "products": {
-      "error": "'ascii' codec can't encode character '\\xf3' in position 25: ordinal not in range(128)"
-    },
-    "promotions": {
-      "error": "'ascii' codec can't encode character '\\xf3' in position 27: ordinal not in range(128)"
+      "error": "HTTP Error 403: Forbidden"
     }
   }
 }
