@@ -50,13 +50,22 @@ jobs:
                                   out['category_text']=page.locator('body').inner_text(timeout=10000)[:20000]
                                   out['blocked_responses']=blocked
                       else: out['catalogue_error']='No navigation link found'
+                      if not blocked:
+                          page.wait_for_timeout(15000)
+                          offers=page.get_by_text('OFERTES',exact=True)
+                          if offers.count():
+                              offers.first.click(timeout=10000)
+                              page.wait_for_timeout(5000)
+                              out['offers_url']=page.url
+                              out['offers_text']=page.locator('body').inner_text(timeout=10000)[:20000]
+                              out['blocked_responses']=blocked
                   browser.close()
           except Exception as e:
               out['error']=str(e)
-          with open('auditoria/bonpreu-category.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+          with open('auditoria/bonpreu-prices-offers.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu-category.json
+          git add auditoria/bonpreu-prices-offers.json
           git commit -m 'Resultat navegador Bonpreu'
           git push origin HEAD:auditoria-superfudis
