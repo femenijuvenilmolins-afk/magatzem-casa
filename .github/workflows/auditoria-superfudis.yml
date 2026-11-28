@@ -16,26 +16,34 @@ jobs:
       - run: |
           python - <<'PY'
           import json, datetime
+          from urllib.parse import urlsplit
           from playwright.sync_api import sync_playwright
           out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat()}
           try:
               with sync_playwright() as p:
                   browser=p.chromium.launch()
                   page=browser.new_page()
+                  blocked=[]
+                  phase='portada'
+                  def record(r):
+                      if r.status in (401,403,429):
+                          u=urlsplit(r.url)
+                          blocked.append({'status':r.status,'url':u.scheme+'://'+u.netloc+u.path,'type':r.request.resource_type,'method':r.request.method,'phase':phase,'time':datetime.datetime.now(datetime.timezone.utc).isoformat(),'status_text':r.status_text})
+                  page.on('response',record)
+                  out['blocked_responses']=blocked
                   response=page.goto('https://www.compraonline.bonpreuesclat.cat/',wait_until='domcontentloaded',timeout=30000)
                   out['status']=response.status if response else None
                   out['url']=page.url
-                  if out['status']==200:
+                  if out['status']==200 and not blocked:
                       page.wait_for_timeout(3000)
                       out['title']=page.title()
                       out['visible_text']=page.locator('body').inner_text(timeout=10000)[:5000]
                       reject=page.get_by_role('button',name='Rebutjar',exact=True)
-                      if reject.count(): reject.first.click(timeout=5000)
+                      if reject.count() and not blocked: reject.first.click(timeout=5000)
                       link=page.get_by_role('link',name='SUPERMERCAT',exact=True)
                       if not link.count(): link=page.get_by_text('SUPERMERCAT',exact=True)
-                      blocked=[]
-                      page.on('response',lambda r: blocked.append(r.status) if r.status in (401,403,429) else None)
-                      if link.count():
+                      if link.count() and not blocked:
+                          phase='menu'
                           link.first.click(timeout=10000)
                           page.wait_for_timeout(5000)
                           out['catalogue_url']=page.url
@@ -43,7 +51,8 @@ jobs:
                           out['blocked_responses']=blocked
                           if not blocked:
                               category=page.get_by_text('Neteja de la llar',exact=True)
-                              if category.count():
+                              if category.count() and not blocked:
+                                  phase='categoria'
                                   category.first.click(timeout=10000)
                                   page.wait_for_timeout(5000)
                                   out['category_url']=page.url
@@ -53,7 +62,8 @@ jobs:
                       if not blocked:
                           page.wait_for_timeout(15000)
                           offers=page.get_by_text('OFERTES',exact=True)
-                          if offers.count():
+                          if offers.count() and not blocked:
+                              phase='ofertes'
                               offers.first.click(timeout=10000)
                               page.wait_for_timeout(5000)
                               out['offers_url']=page.url
@@ -62,10 +72,10 @@ jobs:
                   browser.close()
           except Exception as e:
               out['error']=str(e)
-          with open('auditoria/bonpreu-prices-offers.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+          with open('auditoria/bonpreu-403-diagnostic.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu-prices-offers.json
+          git add auditoria/bonpreu-403-diagnostic.json
           git commit -m 'Resultat navegador Bonpreu'
           git push origin HEAD:auditoria-superfudis
