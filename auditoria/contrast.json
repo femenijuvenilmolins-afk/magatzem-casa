@@ -1,0 +1,696 @@
+{
+  "timestamp": "2026-11-28T05:30:25.703587+00:00",
+  "sample": "generic search terms, not verified inventory SKUs",
+  "superfudis": {
+    "status": "ok",
+    "items": [
+      {
+        "query": "Detergente Marsella Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Detergente ropa jabón de Marsella Bosque Verde en polvo",
+          "brand": "Bosque Verde",
+          "ean": "8402001035302",
+          "format": "caja",
+          "n_units": 1.0,
+          "volume_total": 2750.0,
+          "unit_size_value": 2750.0,
+          "unit_size_unit": "g"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Detergente ropa jabón de Marsella Bosque Verde en polvo",
+            "brand": "Bosque Verde",
+            "ean": "8402001035302",
+            "format": "caja",
+            "n_units": 1.0,
+            "volume_total": 2750.0,
+            "unit_size_value": 2750.0,
+            "unit_size_unit": "g",
+            "price_eur": 5.9,
+            "eur_per_unit": 2.1455,
+            "comparison_unit": "kg",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/14271"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Abrillantador lavavajillas Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Abrillantador lavavajillas líquido Bosque Verde",
+          "brand": "Bosque Verde",
+          "ean": "8480000423146",
+          "format": "botella",
+          "n_units": 1.0,
+          "volume_total": 750.0,
+          "unit_size_value": 750.0,
+          "unit_size_unit": "ml"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Abrillantador lavavajillas líquido Bosque Verde",
+            "brand": "Bosque Verde",
+            "ean": "8480000423146",
+            "format": "botella",
+            "n_units": 1.0,
+            "volume_total": 750.0,
+            "unit_size_value": 750.0,
+            "unit_size_unit": "ml",
+            "price_eur": 1.2,
+            "eur_per_unit": 1.6,
+            "comparison_unit": "l",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/42314"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Papel higiénico Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Papel higiénico húmedo WC Bosque Verde",
+          "brand": "Bosque Verde",
+          "ean": "8402001049996",
+          "format": "paquete",
+          "n_units": 1.0,
+          "volume_total": 100.0,
+          "unit_size_value": 100.0,
+          "unit_size_unit": "ud"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Papel higiénico húmedo WC Bosque Verde",
+            "brand": "Bosque Verde",
+            "ean": "8402001049996",
+            "format": "paquete",
+            "n_units": 1.0,
+            "volume_total": 100.0,
+            "unit_size_value": 100.0,
+            "unit_size_unit": "ud",
+            "price_eur": 1.55,
+            "eur_per_unit": 0.0155,
+            "comparison_unit": "ud",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/47291"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Vinagre limpieza Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Vinagre de Limpieza Bosque Verde concentrado",
+          "brand": "Bosque Verde",
+          "ean": "8480000494023",
+          "format": "botella",
+          "n_units": 1.0,
+          "volume_total": 1000.0,
+          "unit_size_value": 1000.0,
+          "unit_size_unit": "ml"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Vinagre de Limpieza Bosque Verde concentrado",
+            "brand": "Bosque Verde",
+            "ean": "8480000494023",
+            "format": "botella",
+            "n_units": 1.0,
+            "volume_total": 1000.0,
+            "unit_size_value": 1000.0,
+            "unit_size_unit": "ml",
+            "price_eur": 0.9,
+            "eur_per_unit": 0.9,
+            "comparison_unit": "l",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/49402"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Antical Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Limpiador Antical Bosque Verde",
+          "brand": "Bosque Verde",
+          "ean": "8480000430250",
+          "format": "botella",
+          "n_units": 1.0,
+          "volume_total": 750.0,
+          "unit_size_value": 750.0,
+          "unit_size_unit": "ml"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Limpiador Antical Bosque Verde",
+            "brand": "Bosque Verde",
+            "ean": "8480000430250",
+            "format": "botella",
+            "n_units": 1.0,
+            "volume_total": 750.0,
+            "unit_size_value": 750.0,
+            "unit_size_unit": "ml",
+            "price_eur": 1.7,
+            "eur_per_unit": 2.2667,
+            "comparison_unit": "l",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/43025"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Pastillas lavavajillas Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Lavavajillas Todo en 1 Bosque Verde en pastillas",
+          "brand": "Bosque Verde",
+          "ean": "8402001042362",
+          "format": "paquete",
+          "n_units": 1.0,
+          "volume_total": 510.0,
+          "unit_size_value": 510.0,
+          "unit_size_unit": "g"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Lavavajillas Todo en 1 Bosque Verde en pastillas",
+            "brand": "Bosque Verde",
+            "ean": "8402001042362",
+            "format": "paquete",
+            "n_units": 1.0,
+            "volume_total": 510.0,
+            "unit_size_value": 510.0,
+            "unit_size_unit": "g",
+            "price_eur": 2.95,
+            "eur_per_unit": 5.7843,
+            "comparison_unit": "kg",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/42384"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Jabón manos Deliplus",
+        "quantity": 1.0,
+        "product": {
+          "name": "Jabón de manos en pastilla glicerina 100% natural Deliplus",
+          "brand": "Deliplus",
+          "ean": "8402001015441",
+          "format": "pastilla",
+          "n_units": 1.0,
+          "volume_total": 125.0,
+          "unit_size_value": 125.0,
+          "unit_size_unit": "g"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Jabón de manos en pastilla glicerina 100% natural Deliplus",
+            "brand": "Deliplus",
+            "ean": "8402001015441",
+            "format": "pastilla",
+            "n_units": 1.0,
+            "volume_total": 125.0,
+            "unit_size_value": 125.0,
+            "unit_size_unit": "g",
+            "price_eur": 1.1,
+            "eur_per_unit": 8.8,
+            "comparison_unit": "kg",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/46882"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Pasta dientes Deliplus",
+        "quantity": 1.0,
+        "product": {
+          "name": "Cepillo dental Sensitive Deliplus encías y dientes sensibles",
+          "brand": "Deliplus",
+          "ean": "8402001013041",
+          "format": "paquete",
+          "n_units": 1.0,
+          "volume_total": 1.0,
+          "unit_size_value": 1.0,
+          "unit_size_unit": "ud"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Cepillo dental Sensitive Deliplus encías y dientes sensibles",
+            "brand": "Deliplus",
+            "ean": "8402001013041",
+            "format": "paquete",
+            "n_units": 1.0,
+            "volume_total": 1.0,
+            "unit_size_value": 1.0,
+            "unit_size_unit": "ud",
+            "price_eur": 1.3,
+            "eur_per_unit": 1.3,
+            "comparison_unit": "ud",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/52472"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Limpiador WC Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Limpiador WC con lejía Bosque Verde en gel",
+          "brand": "Bosque Verde",
+          "ean": "8480000431134",
+          "format": "botella",
+          "n_units": 1.0,
+          "volume_total": 1000.0,
+          "unit_size_value": 1000.0,
+          "unit_size_unit": "ml"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Limpiador WC con lejía Bosque Verde en gel",
+            "brand": "Bosque Verde",
+            "ean": "8480000431134",
+            "format": "botella",
+            "n_units": 1.0,
+            "volume_total": 1000.0,
+            "unit_size_value": 1000.0,
+            "unit_size_unit": "ml",
+            "price_eur": 0.95,
+            "eur_per_unit": 0.95,
+            "comparison_unit": "l",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/43113"
+          }
+        ],
+        "unavailable_retailers": []
+      },
+      {
+        "query": "Suavizante ropa Bosque Verde",
+        "quantity": 1.0,
+        "product": {
+          "name": "Suavizante ropa Azul Bosque Verde concentrado",
+          "brand": "Bosque Verde",
+          "ean": "8402001027383",
+          "format": "botella",
+          "n_units": 1.0,
+          "volume_total": 1600.0,
+          "unit_size_value": 1600.0,
+          "unit_size_unit": "ml"
+        },
+        "offers": [
+          {
+            "retailer": "Mercadona",
+            "name": "Suavizante ropa Azul Bosque Verde concentrado",
+            "brand": "Bosque Verde",
+            "ean": "8402001027383",
+            "format": "botella",
+            "n_units": 1.0,
+            "volume_total": 1600.0,
+            "unit_size_value": 1600.0,
+            "unit_size_unit": "ml",
+            "price_eur": 1.8,
+            "eur_per_unit": 1.125,
+            "comparison_unit": "l",
+            "match_type": "exact_ean",
+            "source_url": "https://tienda.mercadona.es/product/14122"
+          }
+        ],
+        "unavailable_retailers": []
+      }
+    ],
+    "best_total_eur": 19.35,
+    "best_retailers": [
+      "Mercadona"
+    ],
+    "superfudis_url": "https://www.superfudis.com/?basket=88cf8cfb-6419-438b-a3fd-8c2cb1556f96&utm_source=api&utm_medium=public_api&utm_campaign=basket_optimizer"
+  },
+  "official": [
+    {
+      "sku": "14271",
+      "query": "Detergente Marsella Bosque Verde",
+      "superfudis_price": 5.9,
+      "official": {
+        "id": "14271",
+        "display_name": "Detergente ropa jabón de Marsella Bosque Verde en polvo",
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": "lavados",
+          "unit_size": 2.75,
+          "bulk_price": "2.15",
+          "unit_price": "5.90",
+          "approx_size": false,
+          "size_format": "kg",
+          "total_units": 50,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.118",
+          "min_bunch_amount": 1.0,
+          "reference_format": "lv",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "42314",
+      "query": "Abrillantador lavavajillas Bosque Verde",
+      "superfudis_price": 1.2,
+      "official": {
+        "id": "42314",
+        "display_name": "Abrillantador lavavajillas líquido Bosque Verde",
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 0.75,
+          "bulk_price": "1.60",
+          "unit_price": "1.20",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "1.600",
+          "min_bunch_amount": 1.0,
+          "reference_format": "L",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "47291",
+      "query": "Papel higiénico Bosque Verde",
+      "superfudis_price": 1.55,
+      "official": {
+        "id": "47291",
+        "display_name": "Papel higiénico húmedo WC Bosque Verde",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 100.0,
+          "bulk_price": "0.02",
+          "unit_price": "1.55",
+          "approx_size": false,
+          "size_format": "ud",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.016",
+          "min_bunch_amount": 1.0,
+          "reference_format": "ud",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "49402",
+      "query": "Vinagre limpieza Bosque Verde",
+      "superfudis_price": 0.9,
+      "official": {
+        "id": "49402",
+        "display_name": "Vinagre de Limpieza Bosque Verde concentrado",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 1.0,
+          "bulk_price": "0.90",
+          "unit_price": "0.90",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.900",
+          "min_bunch_amount": 1.0,
+          "reference_format": "L",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "43025",
+      "query": "Antical Bosque Verde",
+      "superfudis_price": 1.7,
+      "official": {
+        "id": "43025",
+        "display_name": "Limpiador Antical Bosque Verde",
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 0.75,
+          "bulk_price": "2.27",
+          "unit_price": "1.70",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "2.267",
+          "min_bunch_amount": 1.0,
+          "reference_format": "L",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "42384",
+      "query": "Pastillas lavavajillas Bosque Verde",
+      "superfudis_price": 2.95,
+      "official": {
+        "id": "42384",
+        "display_name": "Lavavajillas Todo en 1 Bosque Verde en pastillas",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": "pastillas",
+          "unit_size": 0.51,
+          "bulk_price": "0.10",
+          "unit_price": "2.95",
+          "approx_size": false,
+          "size_format": "kg",
+          "total_units": 30,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.099",
+          "min_bunch_amount": 1.0,
+          "reference_format": "lv",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "46882",
+      "query": "Jabón manos Deliplus",
+      "superfudis_price": 1.1,
+      "official": {
+        "id": "46882",
+        "display_name": "Jabón de manos en pastilla glicerina 100% natural Deliplus",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 0.125,
+          "bulk_price": "8.80",
+          "unit_price": "1.10",
+          "approx_size": false,
+          "size_format": "kg",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.880",
+          "min_bunch_amount": 1.0,
+          "reference_format": "100 g",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "52472",
+      "query": "Pasta dientes Deliplus",
+      "superfudis_price": 1.3,
+      "official": {
+        "id": "52472",
+        "display_name": "Cepillo dental Sensitive Deliplus encías y dientes sensibles",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 1.0,
+          "bulk_price": "1.30",
+          "unit_price": "1.30",
+          "approx_size": false,
+          "size_format": "ud",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "1.300",
+          "min_bunch_amount": 1.0,
+          "reference_format": "ud",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "43113",
+      "query": "Limpiador WC Bosque Verde",
+      "superfudis_price": 0.95,
+      "official": {
+        "id": "43113",
+        "display_name": "Limpiador WC con lejía Bosque Verde en gel",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 1.0,
+          "bulk_price": "0.95",
+          "unit_price": "0.95",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.950",
+          "min_bunch_amount": 1.0,
+          "reference_format": "L",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    },
+    {
+      "sku": "14122",
+      "query": "Suavizante ropa Bosque Verde",
+      "superfudis_price": 1.8,
+      "official": {
+        "id": "14122",
+        "display_name": "Suavizante ropa Azul Bosque Verde concentrado",
+        "price_instructions": {
+          "iva": 21,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": "lavados",
+          "unit_size": 1.6,
+          "bulk_price": "1.13",
+          "unit_price": "1.80",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": 80,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.023",
+          "min_bunch_amount": 1.0,
+          "reference_format": "lv",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable": null,
+        "error": null
+      }
+    }
+  ]
+}
