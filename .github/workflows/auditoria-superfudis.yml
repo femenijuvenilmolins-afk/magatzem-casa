@@ -29,13 +29,26 @@ jobs:
                       page.wait_for_timeout(3000)
                       out['title']=page.title()
                       out['visible_text']=page.locator('body').inner_text(timeout=10000)[:5000]
+                      reject=page.get_by_role('button',name='Rebutjar',exact=True)
+                      if reject.count(): reject.first.click(timeout=5000)
+                      link=page.get_by_role('link',name='SUPERMERCAT',exact=True)
+                      if not link.count(): link=page.get_by_text('SUPERMERCAT',exact=True)
+                      blocked=[]
+                      page.on('response',lambda r: blocked.append(r.status) if r.status in (401,403,429) else None)
+                      if link.count():
+                          link.first.click(timeout=10000)
+                          page.wait_for_timeout(5000)
+                          out['catalogue_url']=page.url
+                          out['catalogue_text']=page.locator('body').inner_text(timeout=10000)[:12000]
+                          out['blocked_responses']=blocked
+                      else: out['catalogue_error']='No navigation link found'
                   browser.close()
           except Exception as e:
               out['error']=str(e)
-          with open('auditoria/bonpreu-browser.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+          with open('auditoria/bonpreu-catalogue.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu-browser.json
+          git add auditoria/bonpreu-catalogue.json
           git commit -m 'Resultat navegador Bonpreu'
           git push origin HEAD:auditoria-superfudis
