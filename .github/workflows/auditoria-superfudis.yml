@@ -1,4 +1,4 @@
-name: Diagnosi resposta HTTP Bonpreu
+name: Auditoria entorn HTTP controlat
 on:
   push:
     branches: [auditoria-superfudis]
@@ -7,43 +7,31 @@ permissions:
   contents: write
 jobs:
   prova:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - run: |
           python - <<'PY'
-          import urllib.request, urllib.error, urllib.robotparser, json, datetime, re
+          import platform, ssl, subprocess, json, datetime, threading
+          from http.server import HTTPServer, BaseHTTPRequestHandler
           from pathlib import Path
-          base='https://www.compraonline.bonpreuesclat.cat'
-          ua='MagatzemCasa-Audit/1.0'
-          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat()}
-          try:
-              with urllib.request.urlopen('https://api.ipify.org?format=json',timeout=10) as r:
-                  ip=json.load(r)['ip']
-              out['runner_network_prefix']='.'.join(ip.split('.')[:3])+'.0/24' if '.' in ip else 'IPv6'
-          except Exception as e: out['network_error']=str(e)
-          try:
-              with urllib.request.urlopen(urllib.request.Request(base+'/robots.txt',headers={'User-Agent':ua}),timeout=20) as r: robots=r.read().decode()
-              rp=urllib.robotparser.RobotFileParser(); rp.parse(robots.splitlines())
-              url=base+'/categories'
-              out['robots_allowed']=rp.can_fetch(ua,url)
-              if out['robots_allowed']:
-                  try:
-                      with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':ua}),timeout=20) as r: out['status']=r.status
-                  except urllib.error.HTTPError as e:
-                      out['status']=e.code
-                      allowed={'server','via','content-type','x-cache','x-amzn-waf-action','x-amz-cf-pop','retry-after','cf-mitigated'}
-                      out['headers']={k:v for k,v in e.headers.items() if k.lower() in allowed}
-                      body=e.read(8192).decode('utf-8','replace')
-                      out['body_indicators']={s:s.lower() in body.lower() for s in ['AWS WAF','CloudFront','Access Denied','Forbidden','Request blocked','captcha','challenge']}
-                      out['body_title']=re.findall(r'<title[^>]*>([^<]{1,150})</title>',body,re.I)
-          except Exception as e: out['error']=str(e)
+          class Handler(BaseHTTPRequestHandler):
+              def do_GET(self):
+                  body=json.dumps({'protocol':self.request_version,'user_agent':self.headers.get('User-Agent')}).encode()
+                  self.send_response(200); self.send_header('Content-Length',str(len(body))); self.end_headers(); self.wfile.write(body)
+          server=HTTPServer(('127.0.0.1',0),Handler)
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          def run(args):
+              p=subprocess.run(args,capture_output=True,text=True,timeout=20)
+              return {'exit':p.returncode,'stdout':p.stdout.strip(),'stderr':p.stderr.strip()}
+          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'os':platform.platform(),'python':platform.python_version(),'openssl':ssl.OPENSSL_VERSION,'curl':run(['curl','--version']),'browsers':{b:run(['bash','-c','command -v '+b+' && '+b+' --version']) for b in ['google-chrome','chromium','firefox','microsoft-edge']},'local_http':run(['curl','--http1.1','-sS','http://127.0.0.1:'+str(server.server_port)])}
+          server.shutdown()
           Path('auditoria').mkdir(exist_ok=True)
-          Path('auditoria/bonpreu-network-diagnostic.json').write_text(json.dumps(out,ensure_ascii=False,indent=2))
+          Path('auditoria/entorn-controlat.json').write_text(json.dumps(out,indent=2))
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu-network-diagnostic.json
-          git commit -m 'Diagnosi resposta HTTP sense reintents'
+          git add auditoria/entorn-controlat.json
+          git commit -m 'Registre entorn controlat local'
           git push origin HEAD:auditoria-superfudis
