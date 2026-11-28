@@ -2,13 +2,24 @@ name: Auditoria Superfudis
 on:
   push:
     branches: [auditoria-superfudis]
+    paths: ['.github/workflows/auditoria-superfudis.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
   prova:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
+      - uses: actions/checkout@v4
       - name: Consulta real
         run: |
-          curl --fail-with-body --max-time 90 -sS -H 'Content-Type: application/json' -d '{"items":[{"query":"Detergente Marsella Bosque Verde","quantity":1},{"query":"Abrillantador lavavajillas Bosque Verde","quantity":1}],"retailers":["Mercadona"],"include_delivery":false}' https://supercomparador-i9tw.onrender.com/api/v1/compare-basket
+          mkdir -p auditoria
+          curl --fail-with-body --max-time 90 -sS -H 'Content-Type: application/json' -d '{"items":[{"query":"Detergente Marsella Bosque Verde","quantity":1},{"query":"Abrillantador lavavajillas Bosque Verde","quantity":1}],"retailers":["Mercadona"],"include_delivery":false}' https://supercomparador-i9tw.onrender.com/api/v1/compare-basket -o auditoria/superfudis.json
+          jq -e '.status == "ok"' auditoria/superfudis.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add auditoria/superfudis.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Resultat auditoria Superfudis'
+            git push origin HEAD:auditoria-superfudis
+          fi
