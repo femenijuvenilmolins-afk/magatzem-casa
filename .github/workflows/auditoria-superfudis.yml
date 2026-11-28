@@ -1,4 +1,4 @@
-name: Auditoria geografia
+name: Auditoria promocions
 on:
   push:
     branches: [auditoria-superfudis]
@@ -13,24 +13,39 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           python - <<'PY'
-          import urllib.request as u,json,datetime
-          def get(url,data=None):
-              try:
-                  req=u.Request(url,data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json','User-Agent':'MagatzemCasa-Audit/1.0'})
-                  with u.urlopen(req,timeout=15) as r: return {'status':r.status,'data':json.load(r)}
-              except Exception as e: return {'error':str(e)}
+          import urllib.request as u,json,datetime,time
           base='https://tienda.mercadona.es/api/'
-          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tests':{},'note':'Exploratory parameters; HTTP success does not prove geographic filtering.'}
-          for cp in ['08830','28001']:
-              out['tests']['postal_'+cp]=get(base+'postal-codes/'+cp+'/')
-              for sku in ['14271','42314']:
-                  out['tests'][cp+'_'+sku]=get(base+'products/'+sku+'/?postal_code='+cp)
-          out['tests']['invalid_postal']=get(base+'postal-codes/00000/')
-          out['tests']['superfudis_schema']=get('https://supercomparador-i9tw.onrender.com/openapi.json')
-          with open('auditoria/geografia.json','w') as f: json.dump(out,f,ensure_ascii=False,indent=2)
+          def get(path):
+              try:
+                  with u.urlopen(u.Request(base+path,headers={'User-Agent':'MagatzemCasa-Audit/1.0'}),timeout=15) as r:return json.load(r)
+              except Exception as e:return {'error':str(e)}
+          root=get('categories/')
+          ids=[]
+          def walk(x):
+              if isinstance(x,dict):
+                  if 'id' in x and 'name' in x and not x.get('categories'):ids.append(x['id'])
+                  for v in x.values():walk(v)
+              elif isinstance(x,list):
+                  for v in x:walk(v)
+          walk(root)
+          products={}
+          errors=[]
+          def collect(x):
+              if isinstance(x,dict):
+                  if 'id' in x and isinstance(x.get('price_instructions'),dict):
+                      p=x['price_instructions'];products[str(x['id'])]={'name':x.get('display_name'),'price':p.get('unit_price'),'previous':p.get('previous_unit_price'),'decreased':p.get('price_decreased')}
+                  for v in x.values():collect(v)
+              elif isinstance(x,list):
+                  for v in x:collect(v)
+          for i in list(dict.fromkeys(ids))[:20]:
+              d=get('categories/'+str(i)+'/')
+              if 'error' in d:errors.append({'id':i,'error':d['error']})
+              collect(d);time.sleep(0.5)
+          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'category_count':len(ids),'products_checked':len(products),'discounts':{k:v for k,v in products.items() if v['decreased'] or v['previous']},'products':products,'errors':errors,'root_error':root.get('error') if isinstance(root,dict) else None}
+          with open('auditoria/promocions.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/geografia.json
-          git commit -m 'Evidencia exploratoria geografia'
+          git add auditoria/promocions.json
+          git commit -m 'Evidencia promocions cataleg'
           git push origin HEAD:auditoria-superfudis
