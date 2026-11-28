@@ -1,4 +1,4 @@
-name: Auditoria Bonpreu
+name: Auditoria web publica Bonpreu
 on:
   push:
     branches: [auditoria-superfudis]
@@ -13,23 +13,27 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           python - <<'PY'
-          import urllib.request as u, json, datetime, urllib.parse
-          base='https://www.compraonline.bonpreuesclat.cat'
+          import urllib.request as u, json, datetime, re, urllib.robotparser as rp
+          import xml.etree.ElementTree as ET
           out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tests':{}}
-          for name,path in [('robots','/robots.txt'),('categories','/api/webproductpagews/v1/categories?categoryDepth=2'),('search','/api/webproductpagews/v6/product-pages/search?q='+urllib.parse.quote('detergent'))]:
+          agent='MagatzemCasa-Audit/1.0'
+          for base,path in [('https://www.compraonline.bonpreuesclat.cat','/sitemaps/sitemap_index.xml'),('https://www.bonpreuesclat.cat','/')]:
               try:
-                  with u.urlopen(u.Request(base+path,headers={'User-Agent':'MagatzemCasa-Audit/1.0','Accept':'application/json, text/plain'}),timeout=15) as r:
-                      raw=r.read(500000)
-                      try: data=json.loads(raw)
-                      except Exception: data=raw.decode(errors='replace')[:10000]
-                      out['tests'][name]={'status':r.status,'data':data}
-              except Exception as e:
-                  out['tests'][name]={'error':str(e)}
-                  if '403' in str(e) or '429' in str(e):break
-          with open('auditoria/bonpreu.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+                  def read(url):
+                      with u.urlopen(u.Request(url,headers={'User-Agent':agent}),timeout=15) as r:return r.read(2000000).decode(errors='replace')
+                  robots=rp.RobotFileParser()
+                  robots.parse(read(base+'/robots.txt').splitlines())
+                  if not robots.can_fetch(agent,base+path):
+                      out['tests'][base]={'skipped':'robots exclusion'}
+                      continue
+                  body=read(base+path)
+                  locs=re.findall(r'<loc>(.*?)</loc>',body,re.S)
+                  out['tests'][base]={'bytes':len(body),'sitemap_links':locs[:30],'sitemap_count':len(locs),'price_samples':re.findall(r'.{0,35}\\d+[,.]\\d{2}\\s*(?:€|&euro;).{0,35}',body)[:10],'structured_data':body.count('application/ld+json')}
+              except Exception as e:out['tests'][base]={'error':str(e)}
+          with open('auditoria/bonpreu-public.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu.json
-          git commit -m 'Evidencia consulta Bonpreu'
+          git add auditoria/bonpreu-public.json
+          git commit -m 'Resultat fonts publiques Bonpreu'
           git push origin HEAD:auditoria-superfudis
