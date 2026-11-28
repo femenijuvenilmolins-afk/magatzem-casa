@@ -1,4 +1,4 @@
-name: Prova única de llistat públic de promocions Bonpreu
+name: Prova única de la categoria de bacallà de Bonpreu
 on:
   push:
     branches: [auditoria-superfudis]
@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
-      - name: Llegir una llistat públic de promocions sense reintents
+      - name: Llegir la categoria pública de bacallà sense reintents
         run: |
           python3 - <<'PY'
           import json
@@ -26,7 +26,7 @@ jobs:
               def redirect_request(self, req, fp, code, msg, headers, newurl):
                   return None
 
-          class Promotions(HTMLParser):
+          class ProductCards(HTMLParser):
               def __init__(self):
                   super().__init__()
                   self.depth = 0
@@ -75,14 +75,14 @@ jobs:
                       'promotion': promotion,
                   }
 
-          url = 'https://www.compraonline.bonpreuesclat.cat/promotions'
+          url = 'https://www.compraonline.bonpreuesclat.cat/categories/congelats/peixos-i-mariscos/peixos/bacall%C3%A0/d7775ea7-0d09-4514-b142-e6a997fa2a6a'
           result = {'url': url, 'method': 'GET', 'commit': os.environ['GITHUB_SHA']}
           try:
               request = urllib.request.Request(url, headers={'User-Agent': 'MagatzemCasa-Audit/1.0'})
               with urllib.request.build_opener(NoRedirect()).open(request, timeout=20) as response:
                   result['status'] = response.status
                   result['content_type'] = response.headers.get('Content-Type')
-                  page = Promotions()
+                  page = ProductCards()
                   page.feed(response.read(5_000_000).decode('utf-8', errors='replace'))
                   result['products_with_price'] = len(page.products)
                   result['sample'] = list(page.products.values())[:3]
@@ -93,12 +93,12 @@ jobs:
               result['error'] = str(error)
           output = json.dumps(result, ensure_ascii=False, indent=2)
           print(output)
-          Path('auditoria/bonpreu-promotions-actions.json').write_text(output + '\n')
+          Path('auditoria/bonpreu-cod-category-actions.json').write_text(output + '\n')
           PY
       - name: Desar l’evidència
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu-promotions-actions.json
-          git commit -m 'Resultat de la llistat públic de promocions Bonpreu a GitHub Actions'
+          git add auditoria/bonpreu-cod-category-actions.json
+          git commit -m 'Resultat de la categoria de bacallà de Bonpreu a GitHub Actions'
           git push origin HEAD:auditoria-superfudis
