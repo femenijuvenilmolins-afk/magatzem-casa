@@ -1,0 +1,1752 @@
+{
+  "timestamp": "2026-11-28T05:34:04.946157+00:00",
+  "tests": {
+    "postal_08830": {
+      "error": "HTTP Error 404: Not Found"
+    },
+    "08830_14271": {
+      "status": 200,
+      "data": {
+        "id": "14271",
+        "ean": "8402001035302",
+        "slug": "detergente-ropa-jabon-marsella-bosque-verde-polvo-contiene-dosificador-caja",
+        "brand": "Bosque Verde",
+        "limit": 999,
+        "badges": {
+          "is_water": false,
+          "requires_age_check": false
+        },
+        "origin": null,
+        "photos": [
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=300&w=300",
+            "perspective": 1
+          },
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/5f42099989f695a237cab6398f9b3e90.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/5f42099989f695a237cab6398f9b3e90.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/5f42099989f695a237cab6398f9b3e90.jpg?fit=crop&h=300&w=300",
+            "perspective": 9
+          }
+        ],
+        "status": null,
+        "details": {
+          "brand": "Bosque Verde",
+          "origin": null,
+          "suppliers": [],
+          "legal_name": null,
+          "description": "Detergente ropa jabón de Marsella Bosque Verde en polvo contiene dosificador",
+          "counter_info": null,
+          "danger_mentions": null,
+          "alcohol_by_volume": null,
+          "mandatory_mentions": null,
+          "production_variant": null,
+          "usage_instructions": null,
+          "storage_instructions": null
+        },
+        "is_bulk": false,
+        "packaging": "Caja",
+        "published": true,
+        "share_url": "https://tienda.mercadona.es/product/14271/detergente-ropa-jabon-marsella-bosque-verde-polvo-contiene-dosificador-caja",
+        "thumbnail": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=300&w=300",
+        "categories": [
+          {
+            "id": 26,
+            "name": "Limpieza y hogar",
+            "level": 0,
+            "order": 374,
+            "categories": [
+              {
+                "id": 226,
+                "name": "Detergente y suavizante ropa",
+                "level": 1,
+                "order": 374,
+                "categories": [
+                  {
+                    "id": 723,
+                    "name": "Detergente en polvo y monodosis",
+                    "level": 2,
+                    "order": 374
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "extra_info": [
+          ""
+        ],
+        "display_name": "Detergente ropa jabón de Marsella Bosque Verde en polvo",
+        "unavailable_from": null,
+        "is_variable_weight": false,
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": "lavados",
+          "unit_size": 2.75,
+          "bulk_price": "2.15",
+          "unit_price": "5.90",
+          "approx_size": false,
+          "size_format": "kg",
+          "total_units": 50,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.118",
+          "min_bunch_amount": 1.0,
+          "reference_format": "lv",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable_weekdays": [],
+        "nutrition_information": {
+          "allergens": null,
+          "ingredients": null
+        },
+        "is_new_arrival": false,
+        "color_variants": null
+      }
+    },
+    "08830_42314": {
+      "status": 200,
+      "data": {
+        "id": "42314",
+        "ean": "8480000423146",
+        "slug": "abrillantador-lavavajillas-liquido-bosque-verde-botella",
+        "brand": "Bosque Verde",
+        "limit": 999,
+        "badges": {
+          "is_water": false,
+          "requires_age_check": false
+        },
+        "origin": null,
+        "photos": [
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=300&w=300",
+            "perspective": 2
+          },
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/e5b546cfeb7e49129849d7d9104443ad.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/e5b546cfeb7e49129849d7d9104443ad.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/e5b546cfeb7e49129849d7d9104443ad.jpg?fit=crop&h=300&w=300",
+            "perspective": 9
+          }
+        ],
+        "status": null,
+        "details": {
+          "brand": "Bosque Verde",
+          "origin": null,
+          "suppliers": [
+            {
+              "name": "Inquiba"
+            }
+          ],
+          "legal_name": "",
+          "description": "Abrillantador lavavajillas líquido Bosque Verde",
+          "counter_info": null,
+          "danger_mentions": "Provoca irritación cutánea. Provoca irritación ocular grave. Contiene Masa de reacción de 5-cloro-2-metil-2H-isotiazol-3-ona y 2-metil-2 H-isotiazol-3-ona (3:1). Puede provocar una reacción alérgica.",
+          "alcohol_by_volume": null,
+          "mandatory_mentions": "",
+          "production_variant": "",
+          "usage_instructions": "",
+          "storage_instructions": "",
+          "is_prepared_by_mercadona": false
+        },
+        "is_bulk": false,
+        "packaging": "Botella",
+        "published": true,
+        "share_url": "https://tienda.mercadona.es/product/42314/abrillantador-lavavajillas-liquido-bosque-verde-botella",
+        "thumbnail": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=300&w=300",
+        "categories": [
+          {
+            "id": 26,
+            "name": "Limpieza y hogar",
+            "level": 0,
+            "order": 374,
+            "categories": [
+              {
+                "id": 229,
+                "name": "Limpieza vajilla",
+                "level": 1,
+                "order": 374,
+                "categories": [
+                  {
+                    "id": 735,
+                    "name": "Limpiavajilla a máquina",
+                    "level": 2,
+                    "order": 374
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "extra_info": [
+          null
+        ],
+        "display_name": "Abrillantador lavavajillas líquido Bosque Verde",
+        "unavailable_from": null,
+        "is_variable_weight": false,
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 0.75,
+          "bulk_price": "1.60",
+          "unit_price": "1.20",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "1.600",
+          "min_bunch_amount": 1.0,
+          "reference_format": "L",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable_weekdays": [],
+        "nutrition_information": {
+          "allergens": null,
+          "ingredients": ""
+        },
+        "is_new_arrival": false,
+        "color_variants": null
+      }
+    },
+    "postal_28001": {
+      "error": "HTTP Error 404: Not Found"
+    },
+    "28001_14271": {
+      "status": 200,
+      "data": {
+        "id": "14271",
+        "ean": "8402001035302",
+        "slug": "detergente-ropa-jabon-marsella-bosque-verde-polvo-contiene-dosificador-caja",
+        "brand": "Bosque Verde",
+        "limit": 999,
+        "badges": {
+          "is_water": false,
+          "requires_age_check": false
+        },
+        "origin": null,
+        "photos": [
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=300&w=300",
+            "perspective": 1
+          },
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/5f42099989f695a237cab6398f9b3e90.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/5f42099989f695a237cab6398f9b3e90.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/5f42099989f695a237cab6398f9b3e90.jpg?fit=crop&h=300&w=300",
+            "perspective": 9
+          }
+        ],
+        "status": null,
+        "details": {
+          "brand": "Bosque Verde",
+          "origin": null,
+          "suppliers": [],
+          "legal_name": null,
+          "description": "Detergente ropa jabón de Marsella Bosque Verde en polvo contiene dosificador",
+          "counter_info": null,
+          "danger_mentions": null,
+          "alcohol_by_volume": null,
+          "mandatory_mentions": null,
+          "production_variant": null,
+          "usage_instructions": null,
+          "storage_instructions": null
+        },
+        "is_bulk": false,
+        "packaging": "Caja",
+        "published": true,
+        "share_url": "https://tienda.mercadona.es/product/14271/detergente-ropa-jabon-marsella-bosque-verde-polvo-contiene-dosificador-caja",
+        "thumbnail": "https://prod-mercadona.imgix.net/images/9bd953189306103748aaec9fe8d1097c.jpg?fit=crop&h=300&w=300",
+        "categories": [
+          {
+            "id": 26,
+            "name": "Limpieza y hogar",
+            "level": 0,
+            "order": 374,
+            "categories": [
+              {
+                "id": 226,
+                "name": "Detergente y suavizante ropa",
+                "level": 1,
+                "order": 374,
+                "categories": [
+                  {
+                    "id": 723,
+                    "name": "Detergente en polvo y monodosis",
+                    "level": 2,
+                    "order": 374
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "extra_info": [
+          ""
+        ],
+        "display_name": "Detergente ropa jabón de Marsella Bosque Verde en polvo",
+        "unavailable_from": null,
+        "is_variable_weight": false,
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": "lavados",
+          "unit_size": 2.75,
+          "bulk_price": "2.15",
+          "unit_price": "5.90",
+          "approx_size": false,
+          "size_format": "kg",
+          "total_units": 50,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "0.118",
+          "min_bunch_amount": 1.0,
+          "reference_format": "lv",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable_weekdays": [],
+        "nutrition_information": {
+          "allergens": null,
+          "ingredients": null
+        },
+        "is_new_arrival": false,
+        "color_variants": null
+      }
+    },
+    "28001_42314": {
+      "status": 200,
+      "data": {
+        "id": "42314",
+        "ean": "8480000423146",
+        "slug": "abrillantador-lavavajillas-liquido-bosque-verde-botella",
+        "brand": "Bosque Verde",
+        "limit": 999,
+        "badges": {
+          "is_water": false,
+          "requires_age_check": false
+        },
+        "origin": null,
+        "photos": [
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=300&w=300",
+            "perspective": 2
+          },
+          {
+            "zoom": "https://prod-mercadona.imgix.net/images/e5b546cfeb7e49129849d7d9104443ad.jpg?fit=crop&h=3600&w=3600",
+            "regular": "https://prod-mercadona.imgix.net/images/e5b546cfeb7e49129849d7d9104443ad.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/e5b546cfeb7e49129849d7d9104443ad.jpg?fit=crop&h=300&w=300",
+            "perspective": 9
+          }
+        ],
+        "status": null,
+        "details": {
+          "brand": "Bosque Verde",
+          "origin": null,
+          "suppliers": [
+            {
+              "name": "Inquiba"
+            }
+          ],
+          "legal_name": "",
+          "description": "Abrillantador lavavajillas líquido Bosque Verde",
+          "counter_info": null,
+          "danger_mentions": "Provoca irritación cutánea. Provoca irritación ocular grave. Contiene Masa de reacción de 5-cloro-2-metil-2H-isotiazol-3-ona y 2-metil-2 H-isotiazol-3-ona (3:1). Puede provocar una reacción alérgica.",
+          "alcohol_by_volume": null,
+          "mandatory_mentions": "",
+          "production_variant": "",
+          "usage_instructions": "",
+          "storage_instructions": "",
+          "is_prepared_by_mercadona": false
+        },
+        "is_bulk": false,
+        "packaging": "Botella",
+        "published": true,
+        "share_url": "https://tienda.mercadona.es/product/42314/abrillantador-lavavajillas-liquido-bosque-verde-botella",
+        "thumbnail": "https://prod-mercadona.imgix.net/images/9c10405749ae413a437d070e4d50569e.jpg?fit=crop&h=300&w=300",
+        "categories": [
+          {
+            "id": 26,
+            "name": "Limpieza y hogar",
+            "level": 0,
+            "order": 374,
+            "categories": [
+              {
+                "id": 229,
+                "name": "Limpieza vajilla",
+                "level": 1,
+                "order": 374,
+                "categories": [
+                  {
+                    "id": 735,
+                    "name": "Limpiavajilla a máquina",
+                    "level": 2,
+                    "order": 374
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "extra_info": [
+          null
+        ],
+        "display_name": "Abrillantador lavavajillas líquido Bosque Verde",
+        "unavailable_from": null,
+        "is_variable_weight": false,
+        "price_instructions": {
+          "iva": null,
+          "is_new": false,
+          "is_pack": false,
+          "pack_size": null,
+          "unit_name": null,
+          "unit_size": 0.75,
+          "bulk_price": "1.60",
+          "unit_price": "1.20",
+          "approx_size": false,
+          "size_format": "l",
+          "total_units": null,
+          "unit_selector": true,
+          "bunch_selector": false,
+          "drained_weight": null,
+          "selling_method": 0,
+          "tax_percentage": "21.000",
+          "price_decreased": false,
+          "reference_price": "1.600",
+          "min_bunch_amount": 1.0,
+          "reference_format": "L",
+          "previous_unit_price": null,
+          "increment_bunch_amount": 1.0
+        },
+        "unavailable_weekdays": [],
+        "nutrition_information": {
+          "allergens": null,
+          "ingredients": ""
+        },
+        "is_new_arrival": false,
+        "color_variants": null
+      }
+    },
+    "invalid_postal": {
+      "error": "HTTP Error 404: Not Found"
+    },
+    "superfudis_schema": {
+      "status": 200,
+      "data": {
+        "openapi": "3.1.0",
+        "info": {
+          "title": "Superfudis API",
+          "version": "0.2.0"
+        },
+        "paths": {
+          "/site/catalog/page": {
+            "post": {
+              "tags": [
+                "website-catalog"
+              ],
+              "summary": "Site Catalog Page",
+              "operationId": "site_catalog_page_site_catalog_page_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CatalogPageRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/site/catalog/search": {
+            "post": {
+              "tags": [
+                "website-catalog"
+              ],
+              "summary": "Site Catalog Search",
+              "operationId": "site_catalog_search_site_catalog_search_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CatalogSearchRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/site/catalog/barcode": {
+            "post": {
+              "tags": [
+                "website-catalog"
+              ],
+              "summary": "Site Catalog Barcode",
+              "operationId": "site_catalog_barcode_site_catalog_barcode_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CatalogBarcodeRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/site/catalog/basket": {
+            "post": {
+              "tags": [
+                "website-catalog"
+              ],
+              "summary": "Site Catalog Basket",
+              "operationId": "site_catalog_basket_site_catalog_basket_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CatalogBasketLookupRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/site/analytics/visitor-geography": {
+            "get": {
+              "tags": [
+                "private-analytics"
+              ],
+              "summary": "Visitor Geography",
+              "description": "Admin only: aggregate GA4 visitors by city and country, cached for 1h.",
+              "operationId": "visitor_geography_site_analytics_visitor_geography_get",
+              "parameters": [
+                {
+                  "name": "days",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "integer",
+                    "default": 7,
+                    "title": "Days"
+                  }
+                },
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/health": {
+            "get": {
+              "summary": "Health",
+              "operationId": "health_health_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/auth/me": {
+            "get": {
+              "summary": "Auth Me",
+              "operationId": "auth_me_auth_me_get",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/account": {
+            "delete": {
+              "summary": "Delete Account",
+              "operationId": "delete_account_account_delete",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/mercadona/connect": {
+            "post": {
+              "summary": "Mercadona Connect",
+              "operationId": "mercadona_connect_mercadona_connect_post",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/MercadonaConnectRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/mercadona/orders": {
+            "get": {
+              "summary": "Mercadona Orders",
+              "operationId": "mercadona_orders_mercadona_orders_get",
+              "parameters": [
+                {
+                  "name": "page",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "integer",
+                    "default": 1,
+                    "title": "Page"
+                  }
+                },
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/mercadona/orders/{order_id}/lines": {
+            "get": {
+              "summary": "Mercadona Order Lines",
+              "operationId": "mercadona_order_lines_mercadona_orders__order_id__lines_get",
+              "parameters": [
+                {
+                  "name": "order_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Order Id"
+                  }
+                },
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/mercadona/import-history": {
+            "post": {
+              "summary": "Mercadona Import Account History",
+              "operationId": "mercadona_import_account_history_mercadona_import_history_post",
+              "parameters": [
+                {
+                  "name": "commit",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "Commit"
+                  }
+                },
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/mercadona/transfer": {
+            "post": {
+              "summary": "Mercadona Transfer",
+              "operationId": "mercadona_transfer_mercadona_transfer_post",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/MercadonaTransferRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/dia/connect": {
+            "post": {
+              "summary": "Dia Connect",
+              "operationId": "dia_connect_dia_connect_post",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/DiaConnectRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/dia/transfer": {
+            "post": {
+              "summary": "Dia Transfer",
+              "operationId": "dia_transfer_dia_transfer_post",
+              "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Authorization"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/DiaTransferRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/recipes/import": {
+            "post": {
+              "summary": "Recipes Import",
+              "operationId": "recipes_import_recipes_import_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/RecipeImportRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/basket/optimize": {
+            "post": {
+              "summary": "Basket Optimize",
+              "operationId": "basket_optimize_basket_optimize_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/BasketOptimizeRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/v1/compare-basket": {
+            "post": {
+              "summary": "Compare Basket",
+              "operationId": "compare_basket_api_v1_compare_basket_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/PublicCompareBasketRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "components": {
+          "schemas": {
+            "BasketOptimizeItem": {
+              "properties": {
+                "item_id": {
+                  "type": "integer",
+                  "title": "Item Id"
+                },
+                "quantity": {
+                  "type": "number",
+                  "title": "Quantity"
+                }
+              },
+              "type": "object",
+              "required": [
+                "item_id",
+                "quantity"
+              ],
+              "title": "BasketOptimizeItem"
+            },
+            "BasketOptimizeRequest": {
+              "properties": {
+                "items": {
+                  "items": {
+                    "$ref": "#/components/schemas/BasketOptimizeItem"
+                  },
+                  "type": "array",
+                  "maxItems": 10,
+                  "minItems": 1,
+                  "title": "Items"
+                },
+                "retailers": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Retailers"
+                },
+                "include_delivery": {
+                  "type": "boolean",
+                  "title": "Include Delivery",
+                  "default": false
+                }
+              },
+              "type": "object",
+              "required": [
+                "items",
+                "retailers"
+              ],
+              "title": "BasketOptimizeRequest"
+            },
+            "CatalogBarcodeRequest": {
+              "properties": {
+                "ean": {
+                  "type": "string",
+                  "maxLength": 14,
+                  "minLength": 8,
+                  "pattern": "^\\d{8,14}$",
+                  "title": "Ean"
+                }
+              },
+              "type": "object",
+              "required": [
+                "ean"
+              ],
+              "title": "CatalogBarcodeRequest"
+            },
+            "CatalogBasketLookupRequest": {
+              "properties": {
+                "item_ids": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array",
+                  "maxItems": 200,
+                  "minItems": 1,
+                  "title": "Item Ids"
+                },
+                "eans": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "maxItems": 200,
+                  "title": "Eans"
+                }
+              },
+              "type": "object",
+              "required": [
+                "item_ids"
+              ],
+              "title": "CatalogBasketLookupRequest"
+            },
+            "CatalogPageRequest": {
+              "properties": {
+                "category_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 1.0
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Category Id"
+                },
+                "product_type_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 1.0
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Product Type Id"
+                },
+                "retailers": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "maxItems": 9,
+                  "title": "Retailers"
+                },
+                "group_offset": {
+                  "type": "integer",
+                  "maximum": 100000.0,
+                  "minimum": 0.0,
+                  "title": "Group Offset",
+                  "default": 0
+                },
+                "sort": {
+                  "type": "string",
+                  "enum": [
+                    "relevance",
+                    "difference"
+                  ],
+                  "title": "Sort",
+                  "default": "relevance"
+                }
+              },
+              "type": "object",
+              "title": "CatalogPageRequest"
+            },
+            "CatalogSearchRequest": {
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "maxLength": 120,
+                  "minLength": 2,
+                  "title": "Query"
+                }
+              },
+              "type": "object",
+              "required": [
+                "query"
+              ],
+              "title": "CatalogSearchRequest"
+            },
+            "DiaConnectRequest": {
+              "properties": {
+                "customer_id": {
+                  "type": "string",
+                  "title": "Customer Id"
+                },
+                "customer_code": {
+                  "type": "string",
+                  "title": "Customer Code"
+                },
+                "warehouse": {
+                  "type": "string",
+                  "title": "Warehouse"
+                },
+                "session_id": {
+                  "type": "string",
+                  "title": "Session Id"
+                },
+                "cart_id": {
+                  "type": "string",
+                  "title": "Cart Id"
+                },
+                "virtual_store_id": {
+                  "type": "string",
+                  "title": "Virtual Store Id"
+                },
+                "access_token": {
+                  "type": "string",
+                  "format": "password",
+                  "title": "Access Token",
+                  "writeOnly": true
+                },
+                "refresh_token": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "password",
+                      "writeOnly": true
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Refresh Token"
+                },
+                "cookie_jar": {
+                  "type": "string",
+                  "format": "password",
+                  "title": "Cookie Jar",
+                  "writeOnly": true
+                }
+              },
+              "type": "object",
+              "required": [
+                "customer_id",
+                "customer_code",
+                "warehouse",
+                "session_id",
+                "cart_id",
+                "virtual_store_id",
+                "access_token",
+                "cookie_jar"
+              ],
+              "title": "DiaConnectRequest"
+            },
+            "DiaTransferItem": {
+              "properties": {
+                "retailer_product_id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "title": "Retailer Product Id"
+                },
+                "quantity": {
+                  "type": "number",
+                  "title": "Quantity"
+                }
+              },
+              "type": "object",
+              "required": [
+                "retailer_product_id",
+                "quantity"
+              ],
+              "title": "DiaTransferItem"
+            },
+            "DiaTransferRequest": {
+              "properties": {
+                "retailer": {
+                  "type": "string",
+                  "title": "Retailer"
+                },
+                "items": {
+                  "items": {
+                    "$ref": "#/components/schemas/DiaTransferItem"
+                  },
+                  "type": "array",
+                  "title": "Items"
+                }
+              },
+              "type": "object",
+              "required": [
+                "retailer",
+                "items"
+              ],
+              "title": "DiaTransferRequest"
+            },
+            "HTTPValidationError": {
+              "properties": {
+                "detail": {
+                  "items": {
+                    "$ref": "#/components/schemas/ValidationError"
+                  },
+                  "type": "array",
+                  "title": "Detail"
+                }
+              },
+              "type": "object",
+              "title": "HTTPValidationError"
+            },
+            "MercadonaConnectRequest": {
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "title": "Username"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "title": "Password",
+                  "writeOnly": true
+                },
+                "recaptcha_token": {
+                  "type": "string",
+                  "format": "password",
+                  "title": "Recaptcha Token",
+                  "writeOnly": true
+                },
+                "warehouse": {
+                  "type": "string",
+                  "title": "Warehouse",
+                  "default": "mad3"
+                }
+              },
+              "type": "object",
+              "required": [
+                "username",
+                "password",
+                "recaptcha_token"
+              ],
+              "title": "MercadonaConnectRequest"
+            },
+            "MercadonaTransferItem": {
+              "properties": {
+                "retailer_product_id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "title": "Retailer Product Id"
+                },
+                "quantity": {
+                  "type": "number",
+                  "title": "Quantity"
+                }
+              },
+              "type": "object",
+              "required": [
+                "retailer_product_id",
+                "quantity"
+              ],
+              "title": "MercadonaTransferItem"
+            },
+            "MercadonaTransferRequest": {
+              "properties": {
+                "retailer": {
+                  "type": "string",
+                  "title": "Retailer"
+                },
+                "items": {
+                  "items": {
+                    "$ref": "#/components/schemas/MercadonaTransferItem"
+                  },
+                  "type": "array",
+                  "title": "Items"
+                }
+              },
+              "type": "object",
+              "required": [
+                "retailer",
+                "items"
+              ],
+              "title": "MercadonaTransferRequest"
+            },
+            "PublicBasketItem": {
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "title": "Query"
+                },
+                "quantity": {
+                  "type": "number",
+                  "title": "Quantity",
+                  "default": 1
+                }
+              },
+              "type": "object",
+              "required": [
+                "query"
+              ],
+              "title": "PublicBasketItem"
+            },
+            "PublicCompareBasketRequest": {
+              "properties": {
+                "items": {
+                  "items": {
+                    "$ref": "#/components/schemas/PublicBasketItem"
+                  },
+                  "type": "array",
+                  "maxItems": 10,
+                  "minItems": 1,
+                  "title": "Items"
+                },
+                "retailers": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Retailers"
+                },
+                "include_delivery": {
+                  "type": "boolean",
+                  "title": "Include Delivery",
+                  "default": false
+                }
+              },
+              "type": "object",
+              "required": [
+                "items",
+                "retailers"
+              ],
+              "title": "PublicCompareBasketRequest"
+            },
+            "RecipeImportRequest": {
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "title": "Url"
+                },
+                "servings": {
+                  "type": "integer",
+                  "title": "Servings"
+                }
+              },
+              "type": "object",
+              "required": [
+                "url",
+                "servings"
+              ],
+              "title": "RecipeImportRequest"
+            },
+            "ValidationError": {
+              "properties": {
+                "loc": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ]
+                  },
+                  "type": "array",
+                  "title": "Location"
+                },
+                "msg": {
+                  "type": "string",
+                  "title": "Message"
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Error Type"
+                }
+              },
+              "type": "object",
+              "required": [
+                "loc",
+                "msg",
+                "type"
+              ],
+              "title": "ValidationError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "note": "Exploratory parameters; HTTP success does not prove geographic filtering."
+}
