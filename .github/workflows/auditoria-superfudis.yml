@@ -1,4 +1,4 @@
-name: Auditoria Superfudis
+name: Auditoria geografia
 on:
   push:
     branches: [auditoria-superfudis]
@@ -11,30 +11,26 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Consultes i contrast
-        run: |
-          mkdir -p auditoria
+      - run: |
           python - <<'PY'
-          import json, urllib.request, urllib.error, datetime
-          names=['Detergente Marsella Bosque Verde','Abrillantador lavavajillas Bosque Verde','Papel higiénico Bosque Verde','Vinagre limpieza Bosque Verde','Antical Bosque Verde','Pastillas lavavajillas Bosque Verde','Jabón manos Deliplus','Pasta dientes Deliplus','Limpiador WC Bosque Verde','Suavizante ropa Bosque Verde']
-          def get(url, data=None):
+          import urllib.request as u,json,datetime
+          def get(url,data=None):
               try:
-                  req=urllib.request.Request(url,data=json.dumps(data).encode() if data else None,headers={'Content-Type':'application/json','User-Agent':'MagatzemCasa-Audit/1.0'})
-                  with urllib.request.urlopen(req,timeout=20) as r: return json.load(r)
+                  req=u.Request(url,data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json','User-Agent':'MagatzemCasa-Audit/1.0'})
+                  with u.urlopen(req,timeout=15) as r: return {'status':r.status,'data':json.load(r)}
               except Exception as e: return {'error':str(e)}
-          result=get('https://supercomparador-i9tw.onrender.com/api/v1/compare-basket',{'items':[{'query':n,'quantity':1} for n in names],'retailers':['Mercadona'],'include_delivery':False})
-          official=[]
-          for item in result.get('items',[]):
-              for offer in item.get('offers',[]):
-                  url=offer.get('source_url','')
-                  if url.startswith('https://tienda.mercadona.es/product/'):
-                      sku=url.split('/')[-1]
-                      d=get('https://tienda.mercadona.es/api/products/'+sku+'/')
-                      official.append({'sku':sku,'query':item['query'],'superfudis_price':offer.get('price_eur'),'official':{k:d.get(k) for k in ['id','display_name','price_instructions','unavailable','error']}})
-          with open('auditoria/contrast.json','w') as f: json.dump({'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'sample':'generic search terms, not verified inventory SKUs','superfudis':result,'official':official},f,ensure_ascii=False,indent=2)
+          base='https://tienda.mercadona.es/api/'
+          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tests':{},'note':'Exploratory parameters; HTTP success does not prove geographic filtering.'}
+          for cp in ['08830','28001']:
+              out['tests']['postal_'+cp]=get(base+'postal-codes/'+cp+'/')
+              for sku in ['14271','42314']:
+                  out['tests'][cp+'_'+sku]=get(base+'products/'+sku+'/?postal_code='+cp)
+          out['tests']['invalid_postal']=get(base+'postal-codes/00000/')
+          out['tests']['superfudis_schema']=get('https://supercomparador-i9tw.onrender.com/openapi.json')
+          with open('auditoria/geografia.json','w') as f: json.dump(out,f,ensure_ascii=False,indent=2)
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/contrast.json
-          git commit -m 'Resultat contrast de deu productes'
+          git add auditoria/geografia.json
+          git commit -m 'Evidencia exploratoria geografia'
           git push origin HEAD:auditoria-superfudis
