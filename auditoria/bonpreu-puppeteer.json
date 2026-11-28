@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-11-28T06:07:25.631Z",
+  "blocked": [
+    {
+      "status": 403,
+      "url": "https://www.compraonline.bonpreuesclat.cat/api/webproductpagews/v5/product-pages",
+      "type": "fetch",
+      "method": "GET"
+    }
+  ],
+  "purpose": "Single ordinary homepage diagnostic; no retries or further navigation",
+  "status": 200,
+  "title": "Pàgina principal - BonpreuEsclat online - Supermercat online"
+}
