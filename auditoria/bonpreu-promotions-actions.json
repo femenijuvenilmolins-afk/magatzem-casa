@@ -1,0 +1,31 @@
+{
+  "url": "https://www.compraonline.bonpreuesclat.cat/promotions",
+  "method": "GET",
+  "commit": "17f059c234687b271366a47572aebfe738c79d6d",
+  "status": 200,
+  "content_type": "text/html;charset=utf-8",
+  "products_with_price": 30,
+  "sample": [
+    {
+      "sku": "34548",
+      "name": "BONPREU Paper de cuina compacte 2 capes 3 u.",
+      "format": "3 per paquet",
+      "price": "2,29 €",
+      "promotion": "Nom de l’oferta: Lot estalvi a 17,99 euros/lot. Clica aquí, , fes clic per visualitzar una llista de productes sobre l’oferta"
+    },
+    {
+      "sku": "31774",
+      "name": "GALLINA BLANCA Brou casolà de pollastre",
+      "format": "1L",
+      "price": "2,30 €",
+      "promotion": "Nom de l’oferta: 2a unitat 50% de descompte, , fes clic per visualitzar una llista de productes sobre l’oferta"
+    },
+    {
+      "sku": "33958",
+      "name": "ZANETTI Formatge grana padano en pols",
+      "format": "100g",
+      "price": "1,99 €",
+      "promotion": "Nom de l’oferta: Lot estalvi a 2,95 euros/lot. Clica aquí, , fes clic per visualitzar una llista de productes sobre l’oferta"
+    }
+  ]
+}
