@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-11-28T05:47:03.976405+00:00",
+  "tests": {
+    "https://www.compraonline.bonpreuesclat.cat": {
+      "bytes": 702,
+      "sitemap_links": [
+        "https://www.compraonline.bonpreuesclat.cat/sitemaps/sitemap-categories-part1.xml",
+        "https://www.compraonline.bonpreuesclat.cat/sitemaps/sitemap-collections-part1.xml",
+        "https://www.compraonline.bonpreuesclat.cat/sitemaps/sitemap-products-part1.xml",
+        "https://www.compraonline.bonpreuesclat.cat/sitemaps/sitemap-promotions-part1.xml",
+        "https://www.compraonline.bonpreuesclat.cat/sitemaps/sitemap-recipes-part1.xml"
+      ],
+      "sitemap_count": 5,
+      "price_samples": [],
+      "structured_data": 0
+    },
+    "https://www.bonpreuesclat.cat": {
+      "bytes": 246754,
+      "sitemap_links": [],
+      "sitemap_count": 0,
+      "price_samples": [],
+      "structured_data": 0
+    }
+  }
+}
