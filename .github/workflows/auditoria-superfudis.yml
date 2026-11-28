@@ -15,10 +15,11 @@ jobs:
           python - <<'PY'
           import urllib.request as u, urllib.robotparser as rp, json, datetime, re, time
           import xml.etree.ElementTree as ET
+          from urllib.parse import quote
           base='https://www.compraonline.bonpreuesclat.cat'
           agent='MagatzemCasa-Audit/1.0'
           def read(url):
-              with u.urlopen(u.Request(url,headers={'User-Agent':agent}),timeout=15) as r:return r.read(8000000).decode(errors='replace')
+              with u.urlopen(u.Request(quote(url,safe=':/?&=%#'),headers={'User-Agent':agent}),timeout=15) as r:return r.read(8000000).decode(errors='replace')
           out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tests':{}}
           try:
               robots=rp.RobotFileParser()
