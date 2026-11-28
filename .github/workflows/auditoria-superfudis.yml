@@ -1,4 +1,4 @@
-name: Auditoria navegador Bonpreu
+name: Auditoria Puppeteer Bonpreu
 on:
   push:
     branches: [auditoria-superfudis]
@@ -11,71 +11,33 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - run: pip install playwright
-      - run: python -m playwright install --with-deps chromium
+      - run: npm install --no-save puppeteer
       - run: |
-          python - <<'PY'
-          import json, datetime
-          from urllib.parse import urlsplit
-          from playwright.sync_api import sync_playwright
-          out={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat()}
-          try:
-              with sync_playwright() as p:
-                  browser=p.chromium.launch()
-                  page=browser.new_page()
-                  blocked=[]
-                  phase='portada'
-                  def record(r):
-                      if r.status in (401,403,429):
-                          u=urlsplit(r.url)
-                          blocked.append({'status':r.status,'url':u.scheme+'://'+u.netloc+u.path,'type':r.request.resource_type,'method':r.request.method,'phase':phase,'time':datetime.datetime.now(datetime.timezone.utc).isoformat(),'status_text':r.status_text})
-                  page.on('response',record)
-                  out['blocked_responses']=blocked
-                  response=page.goto('https://www.compraonline.bonpreuesclat.cat/',wait_until='domcontentloaded',timeout=30000)
-                  out['status']=response.status if response else None
-                  out['url']=page.url
-                  if out['status']==200 and not blocked:
-                      page.wait_for_timeout(3000)
-                      out['title']=page.title()
-                      out['visible_text']=page.locator('body').inner_text(timeout=10000)[:5000]
-                      reject=page.get_by_role('button',name='Rebutjar',exact=True)
-                      if reject.count() and not blocked: reject.first.click(timeout=5000)
-                      link=page.get_by_role('link',name='SUPERMERCAT',exact=True)
-                      if not link.count(): link=page.get_by_text('SUPERMERCAT',exact=True)
-                      if link.count() and not blocked:
-                          phase='menu'
-                          link.first.click(timeout=10000)
-                          page.wait_for_timeout(5000)
-                          out['catalogue_url']=page.url
-                          out['catalogue_text']=page.locator('body').inner_text(timeout=10000)[:12000]
-                          out['blocked_responses']=blocked
-                          if not blocked:
-                              category=page.get_by_text('Neteja de la llar',exact=True)
-                              if category.count() and not blocked:
-                                  phase='categoria'
-                                  category.first.click(timeout=10000)
-                                  page.wait_for_timeout(5000)
-                                  out['category_url']=page.url
-                                  out['category_text']=page.locator('body').inner_text(timeout=10000)[:20000]
-                                  out['blocked_responses']=blocked
-                      else: out['catalogue_error']='No navigation link found'
-                      if not blocked:
-                          page.wait_for_timeout(15000)
-                          offers=page.get_by_text('OFERTES',exact=True)
-                          if offers.count() and not blocked:
-                              phase='ofertes'
-                              offers.first.click(timeout=10000)
-                              page.wait_for_timeout(5000)
-                              out['offers_url']=page.url
-                              out['offers_text']=page.locator('body').inner_text(timeout=10000)[:20000]
-                              out['blocked_responses']=blocked
-                  browser.close()
-          except Exception as e:
-              out['error']=str(e)
-          with open('auditoria/bonpreu-403-diagnostic.json','w') as f:json.dump(out,f,ensure_ascii=False,indent=2)
-          PY
+          node --input-type=module <<'JS'
+          import puppeteer from 'puppeteer';
+          import fs from 'node:fs';
+          const out={timestamp:new Date().toISOString(),blocked:[],purpose:'Single ordinary homepage diagnostic; no retries or further navigation'};
+          let browser;
+          try {
+            browser=await puppeteer.launch({headless:true,args:['--no-sandbox']});
+            const page=await browser.newPage();
+            page.on('response',r=>{
+              if([401,403,429].includes(r.status())){
+                const u=new URL(r.url());
+                out.blocked.push({status:r.status(),url:u.origin+u.pathname,type:r.request().resourceType(),method:r.request().method()});
+              }
+            });
+            const r=await page.goto('https://www.compraonline.bonpreuesclat.cat/',{waitUntil:'domcontentloaded',timeout:30000});
+            out.status=r?.status();
+            await new Promise(resolve=>setTimeout(resolve,5000));
+            out.title=await page.title();
+          } catch(e){out.error=String(e);}
+          finally {if(browser) await browser.close();}
+          fs.mkdirSync('auditoria',{recursive:true});
+          fs.writeFileSync('auditoria/bonpreu-puppeteer.json',JSON.stringify(out,null,2));
+          JS
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add auditoria/bonpreu-403-diagnostic.json
-          git commit -m 'Resultat navegador Bonpreu'
+          git add auditoria/bonpreu-puppeteer.json
+          git commit -m 'Diagnosi Puppeteer portada'
           git push origin HEAD:auditoria-superfudis
