@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-11-28T07:05:31.293160+00:00",
+  "os": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "openssl": "OpenSSL 3.0.13 30 Jan 2024",
+  "curl": {
+    "exit": 0,
+    "stdout": "curl 8.5.0 (x86_64-pc-linux-gnu) libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\nRelease-Date: 2023-12-06, security patched: 8.5.0-2ubuntu10.16\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp\nFeatures: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM PSL SPNEGO SSL threadsafe TLS-SRP UnixSockets zstd",
+    "stderr": ""
+  },
+  "browsers": {
+    "google-chrome": {
+      "exit": 0,
+      "stdout": "/usr/bin/google-chrome\nGoogle Chrome 158.0.8127.36",
+      "stderr": ""
+    },
+    "chromium": {
+      "exit": 0,
+      "stdout": "/usr/bin/chromium\nChromium 158.0.8127.0",
+      "stderr": ""
+    },
+    "firefox": {
+      "exit": 0,
+      "stdout": "/usr/bin/firefox\nMozilla Firefox 160.0.1",
+      "stderr": "[2349] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM"
+    },
+    "microsoft-edge": {
+      "exit": 0,
+      "stdout": "/usr/bin/microsoft-edge\nMicrosoft Edge 158.0.4370.33",
+      "stderr": ""
+    }
+  },
+  "local_http": {
+    "exit": 0,
+    "stdout": "{\"protocol\": \"HTTP/1.1\", \"user_agent\": \"curl/8.5.0\"}",
+    "stderr": ""
+  }
+}
